@@ -54,7 +54,7 @@ public class Spider {
             try{
                 String currentUrl = queue.poll();
                 // Perform checks before fetching the page (e.g., existence in index, last modification date)
-                if (!visitedUrls.contains(currentUrl) || needsUpdate(currentUrl)) {
+                if (!visitedUrls.contains(currentUrl)|| needsUpdate(currentUrl)) {
                     visitedUrls.add(currentUrl);
                     fetchPage(currentUrl);
                     count++;
