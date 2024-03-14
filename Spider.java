@@ -103,7 +103,6 @@ public class Spider {
     }
 
     private long getSize(String url){
-
     }
 
     private void addChildPage(String parentUrl, String childUrl) throws ParserException {
