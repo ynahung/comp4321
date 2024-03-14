@@ -12,17 +12,19 @@ import java.util.StringTokenizer;
 import org.htmlparser.beans.LinkBean;
 import java.net.URL;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
 import jdbm.htree.HTree;
 import jdbm.helper.FastIterator;
 import java.io.IOException;
 import java.io.Serializable;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Spider {
     private String url;
@@ -74,16 +76,62 @@ public class Spider {
         recman.close();
     }
 
-    private void addChildPage(String parentUrl, String childUrl) {
+    private class PageInfo{
+        private Date date;
+        private long size;
+        private Set<String> childPages;
+        private String parentUrl;
+
+        public PageInfo(Date date, long size, Set<String> pages){
+            this.date = date;
+            this.size = size;
+            this.childPages = pages;
+        }
+
+        public PageInfo(Date date, long size, String parentUrl){
+            this.date = date;
+            this.size = size;
+            this.parentUrl = parentUrl;
+        }
+
+        public Date getDate(){
+            return date;
+        }
+        public long getSize() {
+            return size;
+        }
+        public Set<String> getChildPages(){
+            return childPages;
+        }
+        public String getParentUrl(){
+            return parentUrl;
+        }
+    }
+
+    private long getSize(String url){
+
+    }
+
+    private void addChildPage(String parentUrl, String childUrl) throws ParserException {
+        Parser parser = new Parser(parentUrl);
+        String pattern = "MMM dd, yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        Date date = simpleDateFormat.parse(parser.VERSION_DATE);
+        long size = getSize(childUrl);
+
         Set<String> childPages = (Set<String>) parentChildMapForward.get(parentUrl);
         if (childPages == null) {
             childPages = new HashSet<>();
         }
         childPages.add(childUrl);
-        parentChildMapForward.put(parentUrl, childPages);
+        parentChildMapForward.put(parentUrl, new PageInfo(date, size, childPages));
         
-        for(Set<String> childPages: childurl){
-            parentChildMapBackward.put(childurl, parentUrl);
+        for(String childurl: childPages){
+            Parser parser = new Parser(childurl);
+            date = simpleDateFormat.parse(parser.VERSION_DATE);
+            size = getSize(childurl);
+
+            parentChildMapBackward.put(childurl, new PageInfo(date, size, parentUrl));
         }
     }
 
@@ -107,9 +155,8 @@ public class Spider {
         return (parentChildMapForward.get(url)!= null)? true: false;
     }
 
-    private boolean needsUpdate(String url) {
+    private boolean needsUpdate(String url){
         // Check if the URL needs to be updated based on the last modification date
-
         return true;
     }
 
