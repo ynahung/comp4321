@@ -104,14 +104,12 @@ public class Spider {
     }
 
     private boolean existsInIndex(String url) {
-        // Check if the URL exists in the index
-        // Implement your logic here
-        return false;
+        return (parentChildMapForward.get(url)!= null)? true: false;
     }
 
     private boolean needsUpdate(String url) {
         // Check if the URL needs to be updated based on the last modification date
-        // Implement your logic here
+
         return true;
     }
 
@@ -120,7 +118,7 @@ public class Spider {
         // Implement your logic here
     }
 
-    private Vector<String> extractLinks(String url) throws ParserException {
+    public Vector<String> extractLinks(String url) throws ParserException {
         LinkBean lb = new LinkBean();
         lb.setURL(url);
         URL[] links = lb.getLinks();
@@ -130,4 +128,21 @@ public class Spider {
         }
         return vec_links;
     }
+
+    public Vector<String> extractWords() throws ParserException
+	{
+		// extract words in url and return them
+		// use StringTokenizer to tokenize the result from StringBean
+		StringBean sb;
+		sb = new StringBean();
+		sb.setLinks(true);
+		sb.setURL(url);
+		String text = sb.getStrings();
+		String[] tokens = text.split("[ ,?]+");
+		Vector<String> vec_tokens = new Vector<>();
+		for(int i = 0; i < tokens.length; i++){
+			vec_tokens.add(tokens[i]);
+		}
+		return vec_tokens;
+	}
 }
