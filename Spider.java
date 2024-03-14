@@ -78,27 +78,21 @@ public class Spider {
 
     private class PageInfo{
         private Date date;
-        private long size;
         private Set<String> childPages;
         private String parentUrl;
 
-        public PageInfo(Date date, long size, Set<String> pages){
+        public PageInfo(Date date,Set<String> pages){
             this.date = date;
-            this.size = size;
             this.childPages = pages;
         }
 
-        public PageInfo(Date date, long size, String parentUrl){
+        public PageInfo(Date date, String parentUrl){
             this.date = date;
-            this.size = size;
             this.parentUrl = parentUrl;
         }
 
         public Date getDate(){
             return date;
-        }
-        public long getSize() {
-            return size;
         }
         public Set<String> getChildPages(){
             return childPages;
@@ -117,21 +111,19 @@ public class Spider {
         String pattern = "MMM dd, yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         Date date = simpleDateFormat.parse(parser.VERSION_DATE);
-        long size = getSize(childUrl);
 
         Set<String> childPages = (Set<String>) parentChildMapForward.get(parentUrl);
         if (childPages == null) {
             childPages = new HashSet<>();
         }
         childPages.add(childUrl);
-        parentChildMapForward.put(parentUrl, new PageInfo(date, size, childPages));
+        parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
         
         for(String childurl: childPages){
             Parser parser = new Parser(childurl);
             date = simpleDateFormat.parse(parser.VERSION_DATE);
-            size = getSize(childurl);
 
-            parentChildMapBackward.put(childurl, new PageInfo(date, size, parentUrl));
+            parentChildMapBackward.put(childurl, new PageInfo(date, parentUrl));
         }
     }
 
