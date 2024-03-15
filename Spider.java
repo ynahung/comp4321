@@ -33,9 +33,9 @@ public class Spider implements Serializable {
     private int numPages;
     private Set<String> visitedUrls;
     private Queue<String> queue;
-    private HTree parentChildMapForward;
-    private HTree parentChildMapBackward;
-    private RecordManager recman;
+    private transient HTree parentChildMapForward;
+    private transient HTree parentChildMapBackward;
+    private transient RecordManager recman;
 
     Spider(String _url, int num) throws IOException {
         url = _url;
@@ -122,7 +122,11 @@ public class Spider implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
         Date date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
-        Set<String> childPages = (Set<String>) parentChildMapForward.get(parentUrl);
+        PageInfo pageInfo = (PageInfo) parentChildMapForward.get(parentUrl);
+        if (pageInfo == null) {
+            pageInfo = new PageInfo(date, new HashSet<String>());
+        }
+        Set<String> childPages = (Set<String>) pageInfo.getChildPages();
         if (childPages == null) {
             childPages = new HashSet<>();
         }
@@ -138,31 +142,66 @@ public class Spider implements Serializable {
     }
 
     public Set<String> getChildPages(String parentUrl) throws IOException {
-        Set<String> childPages = (Set<String>) parentChildMapForward.get(parentUrl);
+        PageInfo pageInfo = (PageInfo) parentChildMapForward.get(parentUrl);
+        if (pageInfo == null) {
+            return new HashSet<>();
+        }
+        Set<String> childPages = (Set<String>) pageInfo.getChildPages();
         if (childPages == null) {
             childPages = new HashSet<>();
         }
         return childPages;
     }
 
-    public Set<String> getParentPages(String childUrl) throws IOException {
-        Set<String> parentPages = (Set<String>) parentChildMapBackward.get(childUrl);
+    public String getParentPages(String childUrl) throws IOException {
+        PageInfo pageInfo = (PageInfo) parentChildMapBackward.get(childUrl);
+        if (pageInfo == null) {
+            return new String();
+        }
+        String parentPages = pageInfo.getParentUrl();
         if (parentPages == null) {
-            parentPages = new HashSet<>();
+            parentPages = new String();
         }
         return parentPages;
     }
 
     private boolean iscyclic(String parentUrl, String childUrl) throws IOException {
-        boolean forwardIsCyclic = parentChildMapForward.get(childUrl) != null && parentChildMapForward.get(childUrl).equals(parentUrl);
-        boolean backwardIsCyclic = parentChildMapBackward.get(parentUrl) != null && parentChildMapBackward.get(parentUrl).equals(childUrl);
-        return forwardIsCyclic || backwardIsCyclic;
-        // This simplistic check assumes direct cyclic (parent-child-parent). For deeper cycles, a more comprehensive check is needed
+        HashSet<String> visited = new HashSet<>();
+        return dfsCheckCycle(childUrl, parentUrl, visited);
+    }
+
+    private boolean dfsCheckCycle(String currentUrl, String targetUrl, HashSet<String> visited) throws IOException {
+        // If the current URL is the same as the target URL, we've found a cycle.
+        if (currentUrl.equals(targetUrl)) {
+            return true;
+        }
+
+        // Check if already visited to avoid infinite loops
+        if (visited.contains(currentUrl)) {
+            return false; // Avoid revisiting the same URL
+        }
+
+        // Mark the current node as visited.
+        visited.add(currentUrl);
+
+        // Retrieve child pages of the current URL.
+        Set<String> childPages = getChildPages(currentUrl);
+        if (childPages != null) { // Ensure there are child pages to iterate over
+            for (String child : childPages) {
+                // Recurse with the child as the new current URL.
+                if (!visited.contains(child) && dfsCheckCycle(child, targetUrl, visited)) {
+                    return true;
+                }
+            }
+        }
+
+        // No cycle found.
+        return false;
     }
 
     private boolean needsUpdate(String url){
         // Check if the URL needs to be updated based on the last modification date
-        return true;
+        return false;
     }
 
     private void fetchPage(String url) {
