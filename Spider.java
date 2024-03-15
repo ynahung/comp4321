@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Vector;
 import org.htmlparser.beans.StringBean;
 import org.htmlparser.Node;
@@ -47,6 +48,7 @@ public class Spider implements Serializable {
         parentChildMapBackward = HTree.createInstance(recman);
     }
 
+
     public static void main(String[] args){
         try {
             Spider mySpider = new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 10);
@@ -76,14 +78,21 @@ public class Spider implements Serializable {
                     if (!visitedUrls.contains(link) && !iscyclic(currentUrl, link)) {
                         queue.add(link);
 
-                        // Add parent-child relationship to the file structure
-                        addChildPage(currentUrl, link);
+                            // Add parent-child relationship to the file structure
+                            addChildPage(currentUrl, link);
+                        }
                     }
                 }
+                recman.commit();
+                recman.close();
+            }
+            catch(java.io.IOException ex)
+		    {
+			    System.err.println(ex.toString());
+		    } catch (ParserException e) {
+                throw new RuntimeException(e);
             }
         }
-        recman.commit();
-        recman.close();
     }
 
     private class PageInfo implements Serializable {
@@ -134,7 +143,7 @@ public class Spider implements Serializable {
         parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
         
         for(String childurl: childPages){
-            Parser parser = new Parser(childurl);
+            parser = new Parser(childurl);
             date = simpleDateFormat.parse(parser.VERSION_DATE);
 
             parentChildMapBackward.put(childurl, new PageInfo(date, parentUrl));
@@ -164,6 +173,7 @@ public class Spider implements Serializable {
         }
         return parentPages;
     }
+
 
     private boolean iscyclic(String parentUrl, String childUrl) throws IOException {
         HashSet<String> visited = new HashSet<>();
@@ -202,7 +212,6 @@ public class Spider implements Serializable {
     private boolean needsUpdate(String url){
         // Check if the URL needs to be updated based on the last modification date
         return false;
-    }
 
     private void fetchPage(String url) {
         // Fetch the page and perform indexing functions
