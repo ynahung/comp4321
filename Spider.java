@@ -51,7 +51,7 @@ public class Spider implements Serializable {
 
     public static void main(String[] args){
         try {
-            Spider mySpider = new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 10);
+            Spider mySpider = new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 4);
             mySpider.crawl();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,9 +83,9 @@ public class Spider implements Serializable {
                         }
                     }
                 }
-                recman.commit();
-                recman.close();
-        }
+            }
+        recman.commit();
+        recman.close();
     }
 
     private class PageInfo implements Serializable {
@@ -124,14 +124,7 @@ public class Spider implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
         Date date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
-        PageInfo pageInfo = (PageInfo) parentChildMapForward.get(parentUrl);
-        if (pageInfo == null) {
-            pageInfo = new PageInfo(date, new HashSet<String>());
-        }
-        Set<String> childPages = (Set<String>) pageInfo.getChildPages();
-        if (childPages == null) {
-            childPages = new HashSet<>();
-        }
+        Set<String> childPages = (Set<String>) getChildPages(parentUrl);
         childPages.add(childUrl);
         parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
         
@@ -146,7 +139,7 @@ public class Spider implements Serializable {
     public Set<String> getChildPages(String parentUrl) throws IOException {
         PageInfo pageInfo = (PageInfo) parentChildMapForward.get(parentUrl);
         if (pageInfo == null) {
-            return new HashSet<>();
+            pageInfo = new PageInfo(new Date(), new HashSet<String>());
         }
         Set<String> childPages = (Set<String>) pageInfo.getChildPages();
         if (childPages == null) {
@@ -158,7 +151,7 @@ public class Spider implements Serializable {
     public String getParentPages(String childUrl) throws IOException {
         PageInfo pageInfo = (PageInfo) parentChildMapBackward.get(childUrl);
         if (pageInfo == null) {
-            return new String();
+            pageInfo = new PageInfo(new Date(), new String());
         }
         String parentPages = pageInfo.getParentUrl();
         if (parentPages == null) {
@@ -169,8 +162,9 @@ public class Spider implements Serializable {
 
     private boolean iscyclic(String parentUrl, String childUrl) throws IOException {
         HashSet<String> visited = new HashSet<>();
-        // return dfsCheckCycle(childUrl, parentUrl, visited);
-        return true;
+        // Initialize the visited set with the parentUrl to prevent immediate loop back.
+        visited.add(parentUrl);
+        return dfsCheckCycle(childUrl, parentUrl, visited);
     }
 
     private boolean dfsCheckCycle(String currentUrl, String targetUrl, HashSet<String> visited) throws IOException {
@@ -189,12 +183,10 @@ public class Spider implements Serializable {
 
         // Retrieve child pages of the current URL.
         Set<String> childPages = getChildPages(currentUrl);
-        if (childPages != null) { // Ensure there are child pages to iterate over
-            for (String child : childPages) {
-                // Recurse with the child as the new current URL.
-                if (!visited.contains(child) && dfsCheckCycle(child, targetUrl, visited)) {
-                    return true;
-                }
+        for (String child : childPages) {
+            // Recurse with the child as the new current URL.
+            if (!visited.contains(child) && dfsCheckCycle(child, targetUrl, visited)) {
+                return true;
             }
         }
 
