@@ -85,13 +85,6 @@ public class Spider implements Serializable {
                 }
                 recman.commit();
                 recman.close();
-            }
-            catch(java.io.IOException ex)
-		    {
-			    System.err.println(ex.toString());
-		    } catch (ParserException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
@@ -143,8 +136,8 @@ public class Spider implements Serializable {
         parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
         
         for(String childurl: childPages){
-            parser = new Parser(childurl);
-            date = simpleDateFormat.parse(parser.VERSION_DATE);
+            myparser = new Parser(childurl);
+            date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
             parentChildMapBackward.put(childurl, new PageInfo(date, parentUrl));
         }
@@ -174,10 +167,10 @@ public class Spider implements Serializable {
         return parentPages;
     }
 
-
     private boolean iscyclic(String parentUrl, String childUrl) throws IOException {
         HashSet<String> visited = new HashSet<>();
-        return dfsCheckCycle(childUrl, parentUrl, visited);
+        // return dfsCheckCycle(childUrl, parentUrl, visited);
+        return true;
     }
 
     private boolean dfsCheckCycle(String currentUrl, String targetUrl, HashSet<String> visited) throws IOException {
@@ -209,9 +202,10 @@ public class Spider implements Serializable {
         return false;
     }
 
-    private boolean needsUpdate(String url){
+    private boolean needsUpdate(String url) {
         // Check if the URL needs to be updated based on the last modification date
         return false;
+    }
 
     private void fetchPage(String url) {
         // Fetch the page and perform indexing functions
