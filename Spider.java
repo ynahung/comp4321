@@ -75,11 +75,11 @@ public class Spider implements Serializable {
 
                 Vector<String> links = extractLinks(currentUrl);
                 for (String link : links) {
-                    if (!visitedUrls.contains(link) && !iscyclic(currentUrl, link)) {
+                    if (!visitedUrls.contains(link) && !queue.contains(link) && !iscyclic(currentUrl, link)) {
                         queue.add(link);
 
-                            // Add parent-child relationship to the file structure
-                            addChildPage(currentUrl, link);
+                        // Add parent-child relationship to the file structure
+                        addChildPage(currentUrl, link);
                         }
                     }
                 }
@@ -128,12 +128,9 @@ public class Spider implements Serializable {
         childPages.add(childUrl);
         parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
         
-        for(String childurl: childPages){
-            myparser = new Parser(childurl);
-            date = simpleDateFormat.parse(myparser.VERSION_DATE);
-
-            parentChildMapBackward.put(childurl, new PageInfo(date, parentUrl));
-        }
+        myparser = new Parser(childUrl);
+        date = simpleDateFormat.parse(myparser.VERSION_DATE);
+        parentChildMapBackward.put(childUrl, new PageInfo(date, parentUrl));
     }
 
     public Set<String> getChildPages(String parentUrl) throws IOException {
