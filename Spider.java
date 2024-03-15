@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Vector;
 import org.htmlparser.beans.StringBean;
 import org.htmlparser.Node;
@@ -45,35 +46,39 @@ public class Spider {
         parentChildMapBackward = HTree.createInstance(recman);
     }
 
-    public void crawl() throws ParserException {
+    public void crawl(){
         queue.add(url);
         int count = 0;
 
         while (!queue.isEmpty() && count < numPages) {
-            String currentUrl = queue.poll();
-
-            if (!visitedUrls.contains(currentUrl)) {
-                visitedUrls.add(currentUrl);
-
+            try{
+                String currentUrl = queue.poll();
                 // Perform checks before fetching the page (e.g., existence in index, last modification date)
-                if (!existsInIndex(currentUrl) || needsUpdate(currentUrl)) {
+                if (!visitedUrls.contains(currentUrl) || needsUpdate(currentUrl)) {
+                    visitedUrls.add(currentUrl);
                     fetchPage(currentUrl);
                     count++;
-                }
 
-                Vector<String> links = extractLinks(currentUrl);
-                for (String link : links) {
-                    if (!visitedUrls.contains(link)) {
-                        queue.add(link);
+                    Vector<String> links = extractLinks(currentUrl);
+                    for (String link : links) {
+                        if (!visitedUrls.contains(link)) {
+                            queue.add(link);
 
-                        // Add parent-child relationship to the file structure
-                        addChildPage(currentUrl, link);
+                            // Add parent-child relationship to the file structure
+                            addChildPage(currentUrl, link);
+                        }
                     }
                 }
+                recman.commit();
+                recman.close();
+            }
+            catch(java.io.IOException ex)
+		    {
+			    System.err.println(ex.toString());
+		    } catch (ParserException e) {
+                throw new RuntimeException(e);
             }
         }
-        recman.commit();
-        recman.close();
     }
 
     private class PageInfo{
@@ -105,7 +110,7 @@ public class Spider {
     private long getSize(String url){
     }
 
-    private void addChildPage(String parentUrl, String childUrl) throws ParserException {
+    private void addChildPage(String parentUrl, String childUrl) throws ParserException, ParseException, IOException {
         Parser parser = new Parser(parentUrl);
         String pattern = "MMM dd, yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -119,7 +124,7 @@ public class Spider {
         parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
         
         for(String childurl: childPages){
-            Parser parser = new Parser(childurl);
+            parser = new Parser(childurl);
             date = simpleDateFormat.parse(parser.VERSION_DATE);
 
             parentChildMapBackward.put(childurl, new PageInfo(date, parentUrl));
@@ -142,13 +147,9 @@ public class Spider {
         return parentPages;
     }
 
-    private boolean existsInIndex(String url) {
-        return (parentChildMapForward.get(url)!= null)? true: false;
-    }
-
     private boolean needsUpdate(String url){
         // Check if the URL needs to be updated based on the last modification date
-        return true;
+        
     }
 
     private void fetchPage(String url) {
