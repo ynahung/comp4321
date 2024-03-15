@@ -11,6 +11,7 @@ import org.htmlparser.util.ParserException;
 import java.util.StringTokenizer;
 import org.htmlparser.beans.LinkBean;
 import java.net.URL;
+import java.text.ParseException;
 
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
@@ -25,8 +26,9 @@ import java.util.Queue;
 import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
-public class Spider {
+public class Spider implements Serializable {
     private String url;
     private int numPages;
     private Set<String> visitedUrls;
@@ -45,25 +47,33 @@ public class Spider {
         parentChildMapBackward = HTree.createInstance(recman);
     }
 
-    public void crawl() throws ParserException {
+    public static void main(String[] args){
+        try {
+            Spider mySpider = new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 10);
+            mySpider.crawl();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void crawl() throws ParserException, ParseException, IOException {
         queue.add(url);
         int count = 0;
 
         while (!queue.isEmpty() && count < numPages) {
             String currentUrl = queue.poll();
 
-            if (!visitedUrls.contains(currentUrl)) {
-                visitedUrls.add(currentUrl);
+            // Perform checks before fetching the page (e.g., existence in visited urls, last modification date)
+            if (!visitedUrls.contains(currentUrl) || needsUpdate(currentUrl)) {
+                if (!visitedUrls.contains(currentUrl))
+                    {visitedUrls.add(currentUrl);}
 
-                // Perform checks before fetching the page (e.g., existence in index, last modification date)
-                if (!existsInIndex(currentUrl) || needsUpdate(currentUrl)) {
-                    fetchPage(currentUrl);
-                    count++;
-                }
+                fetchPage(currentUrl);
+                count++;
 
                 Vector<String> links = extractLinks(currentUrl);
                 for (String link : links) {
-                    if (!visitedUrls.contains(link)) {
+                    if (!visitedUrls.contains(link) && !iscyclic(currentUrl, link)) {
                         queue.add(link);
 
                         // Add parent-child relationship to the file structure
@@ -76,7 +86,7 @@ public class Spider {
         recman.close();
     }
 
-    private class PageInfo{
+    private class PageInfo implements Serializable {
         private Date date;
         private Set<String> childPages;
         private String parentUrl;
@@ -103,13 +113,14 @@ public class Spider {
     }
 
     private long getSize(String url){
+        return 0;
     }
 
-    private void addChildPage(String parentUrl, String childUrl) throws ParserException {
-        Parser parser = new Parser(parentUrl);
+    private void addChildPage(String parentUrl, String childUrl) throws ParserException, ParseException, IOException {
+        Parser myparser = new Parser(parentUrl);
         String pattern = "MMM dd, yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        Date date = simpleDateFormat.parse(parser.VERSION_DATE);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
+        Date date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
         Set<String> childPages = (Set<String>) parentChildMapForward.get(parentUrl);
         if (childPages == null) {
@@ -126,7 +137,7 @@ public class Spider {
         }
     }
 
-    public Set<String> getChildPages(String parentUrl) {
+    public Set<String> getChildPages(String parentUrl) throws IOException {
         Set<String> childPages = (Set<String>) parentChildMapForward.get(parentUrl);
         if (childPages == null) {
             childPages = new HashSet<>();
@@ -134,7 +145,7 @@ public class Spider {
         return childPages;
     }
 
-    public Set<String> getParentPages(String childUrl) {
+    public Set<String> getParentPages(String childUrl) throws IOException {
         Set<String> parentPages = (Set<String>) parentChildMapBackward.get(childUrl);
         if (parentPages == null) {
             parentPages = new HashSet<>();
@@ -142,8 +153,11 @@ public class Spider {
         return parentPages;
     }
 
-    private boolean existsInIndex(String url) {
-        return (parentChildMapForward.get(url)!= null)? true: false;
+    private boolean iscyclic(String parentUrl, String childUrl) throws IOException {
+        boolean forwardIsCyclic = parentChildMapForward.get(childUrl) != null && parentChildMapForward.get(childUrl).equals(parentUrl);
+        boolean backwardIsCyclic = parentChildMapBackward.get(parentUrl) != null && parentChildMapBackward.get(parentUrl).equals(childUrl);
+        return forwardIsCyclic || backwardIsCyclic;
+        // This simplistic check assumes direct cyclic (parent-child-parent). For deeper cycles, a more comprehensive check is needed
     }
 
     private boolean needsUpdate(String url){
