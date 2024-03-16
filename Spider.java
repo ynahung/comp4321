@@ -20,7 +20,12 @@ import jdbm.htree.HTree;
 import jdbm.helper.FastIterator;
 import java.io.IOException;
 import java.io.Serializable;
-
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -32,26 +37,45 @@ import java.util.Locale;
 public class Spider implements Serializable {
     private String url;
     private int numPages;
+    private int pageID;
     private Set<String> visitedUrls;
     private Queue<String> queue;
     private transient HTree parentChildMapForward;
     private transient HTree parentChildMapBackward;
+    private transient HTree urlPageIDMapForward;
+    private transient HTree urlPageIDMapBackward;
     private transient RecordManager recman;
+    private HashSet<String> stopWords;
 
     Spider(String _url, int num) throws IOException {
         url = _url;
         numPages = num;
+        pageID = 0;
         visitedUrls = new HashSet<>();
         queue = new LinkedList<>();
         recman = RecordManagerFactory.createRecordManager("database");
         parentChildMapForward = HTree.createInstance(recman);
         parentChildMapBackward = HTree.createInstance(recman);
+        urlPageIDMapForward = HTree.createInstance(recman);
+        urlPageIDMapBackward = HTree.createInstance(recman);
+
+        // Reading stopwords.txt
+        stopWords = new HashSet<String>();
+        FileReader stopWordFR = new FileReader("stopwords.txt");
+        BufferedReader stopWordBR = new BufferedReader(stopWordFR);
+        String line;
+        while ((line = stopWordBR.readLine()) != null) {
+            stopWords.add(line);
+        }
+        stopWordFR.close();
+        stopWordBR.close();
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
-            Spider mySpider = new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 4);
+            Spider mySpider =
+                    new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 4);
             mySpider.crawl();
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,26 +88,32 @@ public class Spider implements Serializable {
 
         while (!queue.isEmpty() && count < numPages) {
             String currentUrl = queue.poll();
-
-            // Perform checks before fetching the page (e.g., existence in visited urls, last modification date)
+            addPageID(currentUrl);
+            // Perform checks before fetching the page (e.g., existence in visited urls, last
+            // modification date)
             if (!visitedUrls.contains(currentUrl) || needsUpdate(currentUrl)) {
-                if (!visitedUrls.contains(currentUrl))
-                    {visitedUrls.add(currentUrl);}
+                if (!visitedUrls.contains(currentUrl)) {
+                    visitedUrls.add(currentUrl);
+                }
 
                 fetchPage(currentUrl);
                 count++;
 
                 Vector<String> links = extractLinks(currentUrl);
                 for (String link : links) {
+                    addPageID(link);
+                }
+                for (String link : links) {
                     if (!visitedUrls.contains(link) && !iscyclic(currentUrl, link)) {
                         queue.add(link);
 
-                            // Add parent-child relationship to the file structure
-                            addChildPage(currentUrl, link);
-                        }
+                        // Add parent-child relationship to the file structure
+                        addChildPage(currentUrl, link);
                     }
                 }
             }
+        }
+
         recman.commit();
         recman.close();
     }
@@ -93,32 +123,43 @@ public class Spider implements Serializable {
         private Set<String> childPages;
         private String parentUrl;
 
-        public PageInfo(Date date,Set<String> pages){
+        public PageInfo(Date date, Set<String> pages) {
             this.date = date;
             this.childPages = pages;
         }
 
-        public PageInfo(Date date, String parentUrl){
+        public PageInfo(Date date, String parentUrl) {
             this.date = date;
             this.parentUrl = parentUrl;
         }
 
-        public Date getDate(){
+        public Date getDate() {
             return date;
         }
-        public Set<String> getChildPages(){
+
+        public Set<String> getChildPages() {
             return childPages;
         }
-        public String getParentUrl(){
+
+        public String getParentUrl() {
             return parentUrl;
         }
     }
 
-    private long getSize(String url){
+    private long getSize(String url) {
         return 0;
     }
 
-    private void addChildPage(String parentUrl, String childUrl) throws ParserException, ParseException, IOException {
+    private void addPageID(String url) throws IOException {
+        if (urlPageIDMapForward.get(url) == null) {
+            urlPageIDMapForward.put(url, pageID);
+            urlPageIDMapBackward.put(pageID, url);
+            pageID++;
+        }
+    }
+
+    private void addChildPage(String parentUrl, String childUrl)
+            throws ParserException, ParseException, IOException {
         Parser myparser = new Parser(parentUrl);
         String pattern = "MMM dd, yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.ENGLISH);
@@ -126,18 +167,21 @@ public class Spider implements Serializable {
 
         Set<String> childPages = (Set<String>) getChildPages(parentUrl);
         childPages.add(childUrl);
-        parentChildMapForward.put(parentUrl, new PageInfo(date, childPages));
-        
-        for(String childurl: childPages){
+        parentChildMapForward.put(urlPageIDMapForward.get(parentUrl),
+                new PageInfo(date, childPages));
+
+        for (String childurl : childPages) {
             myparser = new Parser(childurl);
             date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
-            parentChildMapBackward.put(childurl, new PageInfo(date, parentUrl));
+            parentChildMapBackward.put(urlPageIDMapForward.get(childurl),
+                    new PageInfo(date, parentUrl));
         }
     }
 
     public Set<String> getChildPages(String parentUrl) throws IOException {
-        PageInfo pageInfo = (PageInfo) parentChildMapForward.get(parentUrl);
+        PageInfo pageInfo =
+                (PageInfo) parentChildMapForward.get(urlPageIDMapForward.get(parentUrl));
         if (pageInfo == null) {
             pageInfo = new PageInfo(new Date(), new HashSet<String>());
         }
@@ -149,7 +193,8 @@ public class Spider implements Serializable {
     }
 
     public String getParentPages(String childUrl) throws IOException {
-        PageInfo pageInfo = (PageInfo) parentChildMapBackward.get(childUrl);
+        PageInfo pageInfo =
+                (PageInfo) parentChildMapBackward.get(urlPageIDMapForward.get(childUrl));
         if (pageInfo == null) {
             pageInfo = new PageInfo(new Date(), new String());
         }
@@ -167,7 +212,8 @@ public class Spider implements Serializable {
         return dfsCheckCycle(childUrl, parentUrl, visited);
     }
 
-    private boolean dfsCheckCycle(String currentUrl, String targetUrl, HashSet<String> visited) throws IOException {
+    private boolean dfsCheckCycle(String currentUrl, String targetUrl, HashSet<String> visited)
+            throws IOException {
         // If the current URL is the same as the target URL, we've found a cycle.
         if (currentUrl.equals(targetUrl)) {
             return true;
@@ -199,7 +245,7 @@ public class Spider implements Serializable {
         return false;
     }
 
-    private void fetchPage(String url) {
+    private void fetchPage(String currentUrl) throws ParserException {
         // Fetch the page and perform indexing functions
         // Implement your logic here
     }
@@ -215,20 +261,26 @@ public class Spider implements Serializable {
         return vec_links;
     }
 
-    public Vector<String> extractWords() throws ParserException
-	{
-		// extract words in url and return them
-		// use StringTokenizer to tokenize the result from StringBean
-		StringBean sb;
-		sb = new StringBean();
-		sb.setLinks(true);
-		sb.setURL(url);
-		String text = sb.getStrings();
-		String[] tokens = text.split("[ ,?]+");
-		Vector<String> vec_tokens = new Vector<>();
-		for(int i = 0; i < tokens.length; i++){
-			vec_tokens.add(tokens[i]);
-		}
-		return vec_tokens;
-	}
+    public Vector<String> extractWords(String currentUrl) throws ParserException {
+        // extract words in url and return them
+        // use StringTokenizer to tokenize the result from StringBean
+        StringBean sb;
+        sb = new StringBean();
+        sb.setLinks(true);
+        sb.setURL(currentUrl);
+        sb.setReplaceNonBreakingSpaces(true);
+        sb.setCollapse(true);
+        String text = sb.getStrings();
+        String[] tokens = text.split("[ ,?]+");
+        Vector<String> vec_tokens = new Vector<>();
+        for (int i = 0; i < tokens.length; i++) {
+            // lowercase and remove whitespace
+            String token = tokens[i].toLowerCase().replaceAll("\\s", "");
+            if (!stopWords.contains(token)) {
+                vec_tokens.add(token);
+            }
+
+        }
+        return vec_tokens;
+    }
 }
