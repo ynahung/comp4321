@@ -41,10 +41,13 @@ public class Spider implements Serializable {
     private int pageID;
     private Set<String> visitedUrls;
     private Queue<String> queue;
-    private transient HTree parentChildMapForward;
-    private transient HTree parentChildMapBackward;
+
     private transient HTree urlPageIDMapForward;
     private transient HTree urlPageIDMapBackward;
+    private transient HTree wordIDMapForward;
+    private transient HTree wordIDMapBackward;
+    private transient HTree parentIDPageInfoMap;
+    private transient HTree childIDPageInfoMap;
     private transient RecordManager recman;
     private HashSet<String> stopWords;
 
@@ -54,11 +57,24 @@ public class Spider implements Serializable {
         pageID = 0;
         visitedUrls = new HashSet<>();
         queue = new LinkedList<>();
+
         recman = RecordManagerFactory.createRecordManager("database");
-        parentChildMapForward = HTree.createInstance(recman);
-        parentChildMapBackward = HTree.createInstance(recman);
         urlPageIDMapForward = HTree.createInstance(recman);
+        recman.setNamedObject("urlPageIDMapForward", urlPageIDMapForward.getRecid());
         urlPageIDMapBackward = HTree.createInstance(recman);
+        recman.setNamedObject("urlPageIDMapBackward", urlPageIDMapBackward.getRecid());
+
+        wordIDMapForward = HTree.createInstance(recman);
+        recman.setNamedObject("wordIDMapForward", wordIDMapForward.getRecid());
+        wordIDMapBackward = HTree.createInstance(recman);
+        recman.setNamedObject("wordIDMapBackward", wordIDMapBackward.getRecid());
+
+        parentIDPageInfoMap = HTree.createInstance(recman);
+        recman.setNamedObject("parentIDPageInfoMap", parentIDPageInfoMap.getRecid());
+        childIDPageInfoMap = HTree.createInstance(recman);
+        recman.setNamedObject("childIDPageInfoMap", childIDPageInfoMap.getRecid());
+
+
 
         // Reading stopwords.txt
         stopWords = new HashSet<String>();
@@ -126,7 +142,8 @@ public class Spider implements Serializable {
             if (isChild) {
                 this.childUrls = pages;
             } else {
-                this.parentUrls = pages; // Use a flag to differentiate between child and parent lists
+                this.parentUrls = pages; // Use a flag to differentiate between child and parent
+                                         // lists
             }
         }
 
@@ -176,11 +193,17 @@ public class Spider implements Serializable {
             urlPageIDMapBackward.put(pageID, url);
 
             // Initialize PageInfo with empty lists for a new URL
-            PageInfo pageInfo = new PageInfo(new Date(), new ArrayList<>(), true);
-            parentChildMapForward.put(pageID, pageInfo);
+            PageInfo pageInfo = new PageInfo(new Date(), new ArrayList<>(), true); // Assuming
+                                                                                   // true
+            // for childUrls
+            // initialization
+            parentIDPageInfoMap.put(pageID, pageInfo); // Link pageID with PageInfo in forward map
 
-            PageInfo reversePageInfo = new PageInfo(new Date(), new ArrayList<>(), false);
-            parentChildMapBackward.put(pageID, reversePageInfo);
+            PageInfo reversePageInfo = new PageInfo(new Date(), new ArrayList<>(), false); // False
+            // for
+            // parentUrls
+            childIDPageInfoMap.put(pageID, reversePageInfo); // Similarly for backward map
+
 
             pageID++; // Increment pageID for the next URL
         }
@@ -194,33 +217,31 @@ public class Spider implements Serializable {
         Date date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
         int parentPageID = (int) urlPageIDMapForward.get(parentUrl);
-        PageInfo parentPageInfo = (PageInfo) parentChildMapForward.get(parentPageID);
+        PageInfo parentPageInfo = (PageInfo) parentIDPageInfoMap.get(parentPageID);
         if (!parentPageInfo.getchildUrls().contains(childUrl)) {
-            parentPageInfo.addChildPage(childUrl);
-            parentChildMapForward.put(parentPageID, parentPageInfo);
+          parentPageInfo.addChildPage(childUrl);
+          parentIDPageInfoMap.put(parentPageID, parentPageInfo);
         }
 
         myparser = new Parser(childUrl);
         date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
         int childPageID = (int) urlPageIDMapForward.get(childUrl);
-        PageInfo childPageInfo = (PageInfo) parentChildMapBackward.get(childPageID);
+        PageInfo childPageInfo = (PageInfo) childIDPageInfoMap.get(childPageID);
         if (!childPageInfo.getParentUrls().contains(parentUrl)) {
-            childPageInfo.addParentUrl(parentUrl);
-            parentChildMapBackward.put(childPageID, childPageInfo);
+          childPageInfo.addParentUrl(parentUrl);
+          childIDPageInfoMap.put(childPageID, childPageInfo);
         }
     }
 
     public ArrayList<String> getchildUrls(String parentUrl) throws IOException {
-        PageInfo pageInfo =
-                (PageInfo) parentChildMapForward.get(urlPageIDMapForward.get(parentUrl));
+        PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(urlPageIDMapForward.get(parentUrl));
         ArrayList<String> childUrls = (ArrayList<String>) pageInfo.getchildUrls();
         return childUrls;
     }
 
     public ArrayList<String> getParentUrls(String childUrl) throws IOException {
-        PageInfo pageInfo =
-                (PageInfo) parentChildMapBackward.get(urlPageIDMapForward.get(childUrl));
+        PageInfo pageInfo = (PageInfo) childIDPageInfoMap.get(urlPageIDMapForward.get(childUrl));
         ArrayList<String> parentUrls = pageInfo.getParentUrls();
         return parentUrls;
     }
