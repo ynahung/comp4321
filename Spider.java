@@ -136,7 +136,7 @@ public class Spider implements Serializable {
         private ArrayList<String> childUrls;
         private ArrayList<String> parentUrls;
 
-        public PageInfo(Date date, RecordManager recman, ArrayList<String> pages, boolean isChild) {
+        public PageInfo(Date date, ArrayList<String> pages, boolean isChild) {
             this.date = date;
             if (isChild) {
                 this.childUrls = pages;
@@ -190,13 +190,13 @@ public class Spider implements Serializable {
             urlPageIDMapBackward.put(pageID, url);
 
             // Initialize PageInfo with empty lists for a new URL
-            PageInfo pageInfo = new PageInfo(new Date(), recman, new ArrayList<>(), true); // Assuming
-                                                                                           // true
+            PageInfo pageInfo = new PageInfo(new Date(), new ArrayList<>(), true); // Assuming
+                                                                                   // true
             // for childUrls
             // initialization
             parentIDPageInfoMap.put(pageID, pageInfo); // Link pageID with PageInfo in forward map
 
-            PageInfo reversePageInfo = new PageInfo(new Date(), recman, new ArrayList<>(), false); // False
+            PageInfo reversePageInfo = new PageInfo(new Date(), new ArrayList<>(), false); // False
             // for
             // parentUrls
             childIDPageInfoMap.put(pageID, reversePageInfo); // Similarly for backward map
@@ -229,7 +229,7 @@ public class Spider implements Serializable {
     public ArrayList<String> getchildUrls(String parentUrl) throws IOException {
         PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(urlPageIDMapForward.get(parentUrl));
         if (pageInfo == null) {
-            pageInfo = new PageInfo(new Date(), recman, new ArrayList<String>(), true);
+            pageInfo = new PageInfo(new Date(), new ArrayList<String>(), true);
         }
         ArrayList<String> childUrls = (ArrayList<String>) pageInfo.getchildUrls();
         if (childUrls == null) {
@@ -241,7 +241,7 @@ public class Spider implements Serializable {
     public ArrayList<String> getParentUrls(String childUrl) throws IOException {
         PageInfo pageInfo = (PageInfo) childIDPageInfoMap.get(urlPageIDMapForward.get(childUrl));
         if (pageInfo == null) {
-            pageInfo = new PageInfo(new Date(), recman, new ArrayList<String>(), false);
+            pageInfo = new PageInfo(new Date(), new ArrayList<String>(), false);
         }
         ArrayList<String> parentUrls = pageInfo.getParentUrls();
         if (parentUrls == null) {
