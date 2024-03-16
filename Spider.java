@@ -57,11 +57,24 @@ public class Spider implements Serializable {
         pageID = 0;
         visitedUrls = new HashSet<>();
         queue = new LinkedList<>();
+
         recman = RecordManagerFactory.createRecordManager("database");
-        parentIDPageInfoMap = HTree.createInstance(recman);
-        childIDPageInfoMap = HTree.createInstance(recman);
         urlPageIDMapForward = HTree.createInstance(recman);
+        recman.setNamedObject("urlPageIDMapForward", urlPageIDMapForward.getRecid());
         urlPageIDMapBackward = HTree.createInstance(recman);
+        recman.setNamedObject("urlPageIDMapBackward", urlPageIDMapBackward.getRecid());
+
+        wordIDMapForward = HTree.createInstance(recman);
+        recman.setNamedObject("wordIDMapForward", wordIDMapForward.getRecid());
+        wordIDMapBackward = HTree.createInstance(recman);
+        recman.setNamedObject("wordIDMapBackward", wordIDMapBackward.getRecid());
+
+        parentIDPageInfoMap = HTree.createInstance(recman);
+        recman.setNamedObject("parentIDPageInfoMap", parentIDPageInfoMap.getRecid());
+        childIDPageInfoMap = HTree.createInstance(recman);
+        recman.setNamedObject("childIDPageInfoMap", childIDPageInfoMap.getRecid());
+
+
 
         // Reading stopwords.txt
         stopWords = new HashSet<String>();
