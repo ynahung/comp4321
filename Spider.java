@@ -136,8 +136,7 @@ public class Spider implements Serializable {
         private ArrayList<String> childUrls;
         private ArrayList<String> parentUrls;
 
-        public PageInfo(Date date, RecordManager recman, ArrayList<String> pages, boolean isChild)
-                throws IOException {
+        public PageInfo(Date date, RecordManager recman, ArrayList<String> pages, boolean isChild) {
             this.date = date;
             if (isChild) {
                 this.childUrls = pages;
