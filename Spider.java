@@ -92,7 +92,7 @@ public class Spider implements Serializable {
     public static void main(String[] args) {
         try {
             Spider mySpider =
-                    new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 5);
+                    new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 6);
             mySpider.crawl();
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,23 +106,24 @@ public class Spider implements Serializable {
 
         while (!queue.isEmpty() && count < numPages) {
             String currentUrl = queue.poll();
-            // Perform checks before fetching the page (e.g., existence in visited urls, last
-            // modification date)
+            // Check if the URL has been visited or needs to be updated
             if (!visitedUrls.contains(currentUrl) || needsUpdate(currentUrl)) {
                 if (!visitedUrls.contains(currentUrl)) {
                     visitedUrls.add(currentUrl);
+                    fetchPage(currentUrl);
+                    count++;
                 }
+            }
 
-                fetchPage(currentUrl);
-                count++;
-
-                Vector<String> links = extractLinks(currentUrl);
-                for (String link : links) {
-                    if (!visitedUrls.contains(link) && !queue.contains(link)) {
-                        addPageID(link);
-                        queue.add(link);
-                        addChildPage(currentUrl, link);
-                    }
+            Vector<String> links = extractLinks(currentUrl);
+            for (String link : links) {
+                if (!visitedUrls.contains(link)) {
+                    addPageID(link);
+                }
+                // Always add child relationship even if not fetching again
+                addChildPage(currentUrl, link);
+                if (!visitedUrls.contains(link) && !queue.contains(link)) {
+                    queue.add(link);
                 }
             }
         }
@@ -184,8 +185,10 @@ public class Spider implements Serializable {
     }
 
     private void addPageID(String url) throws IOException {
-        Long existingPageID = (Long) urlPageIDMapForward.get(url);
+        Integer existingPageID = (Integer) urlPageIDMapForward.get(url);
+        
         if (existingPageID == null) {
+            // No existing page ID found, so we assign a new one
             urlPageIDMapForward.put(url, pageID);
             urlPageIDMapBackward.put(pageID, url);
 
@@ -201,6 +204,7 @@ public class Spider implements Serializable {
             // parentUrls
             childIDPageInfoMap.put(pageID, reversePageInfo); // Similarly for backward map
 
+
             pageID++; // Increment pageID for the next URL
         }
     }
@@ -214,39 +218,31 @@ public class Spider implements Serializable {
 
         int parentPageID = (int) urlPageIDMapForward.get(parentUrl);
         PageInfo parentPageInfo = (PageInfo) parentIDPageInfoMap.get(parentPageID);
-        parentPageInfo.addChildPage(childUrl);
-        parentIDPageInfoMap.put(parentPageID, parentPageInfo);
+        if (!parentPageInfo.getchildUrls().contains(childUrl)) {
+          parentPageInfo.addChildPage(childUrl);
+          parentIDPageInfoMap.put(parentPageID, parentPageInfo);
+        }
 
         myparser = new Parser(childUrl);
         date = simpleDateFormat.parse(myparser.VERSION_DATE);
 
         int childPageID = (int) urlPageIDMapForward.get(childUrl);
         PageInfo childPageInfo = (PageInfo) childIDPageInfoMap.get(childPageID);
-        childPageInfo.addParentUrl(parentUrl);
-        childIDPageInfoMap.put(childPageID, childPageInfo);
+        if (!childPageInfo.getParentUrls().contains(parentUrl)) {
+          childPageInfo.addParentUrl(parentUrl);
+          childIDPageInfoMap.put(childPageID, childPageInfo);
+        }
     }
 
     public ArrayList<String> getchildUrls(String parentUrl) throws IOException {
         PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(urlPageIDMapForward.get(parentUrl));
-        if (pageInfo == null) {
-            pageInfo = new PageInfo(new Date(), new ArrayList<String>(), true);
-        }
         ArrayList<String> childUrls = (ArrayList<String>) pageInfo.getchildUrls();
-        if (childUrls == null) {
-            childUrls = new ArrayList<String>();
-        }
         return childUrls;
     }
 
     public ArrayList<String> getParentUrls(String childUrl) throws IOException {
         PageInfo pageInfo = (PageInfo) childIDPageInfoMap.get(urlPageIDMapForward.get(childUrl));
-        if (pageInfo == null) {
-            pageInfo = new PageInfo(new Date(), new ArrayList<String>(), false);
-        }
         ArrayList<String> parentUrls = pageInfo.getParentUrls();
-        if (parentUrls == null) {
-            parentUrls = new ArrayList<String>();
-        }
         return parentUrls;
     }
 
