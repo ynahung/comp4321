@@ -83,12 +83,12 @@ public class Spider implements Serializable {
     }
 
     public void crawl() throws ParserException, ParseException, IOException {
+        addPageID(url);
         queue.add(url);
-        int count = 0;
+        int count = 1;
 
         while (!queue.isEmpty() && count < numPages) {
             String currentUrl = queue.poll();
-            addPageID(currentUrl);
             // Perform checks before fetching the page (e.g., existence in visited urls, last
             // modification date)
             if (!visitedUrls.contains(currentUrl) || needsUpdate(currentUrl)) {
@@ -101,10 +101,8 @@ public class Spider implements Serializable {
 
                 Vector<String> links = extractLinks(currentUrl);
                 for (String link : links) {
-                    addPageID(link);
-                }
-                for (String link : links) {
-                    if (!visitedUrls.contains(link) && !iscyclic(currentUrl, link)) {
+                    if (!visitedUrls.contains(link) && !queue.contains(link)) {
+                        addPageID(link);
                         queue.add(link);
 
                         // Add parent-child relationship to the file structure
@@ -170,13 +168,10 @@ public class Spider implements Serializable {
         parentChildMapForward.put(urlPageIDMapForward.get(parentUrl),
                 new PageInfo(date, childPages));
 
-        for (String childurl : childPages) {
-            myparser = new Parser(childurl);
-            date = simpleDateFormat.parse(myparser.VERSION_DATE);
-
-            parentChildMapBackward.put(urlPageIDMapForward.get(childurl),
-                    new PageInfo(date, parentUrl));
-        }
+        myparser = new Parser(childUrl);
+        date = simpleDateFormat.parse(myparser.VERSION_DATE);
+        parentChildMapBackward.put(urlPageIDMapForward.get(childUrl),
+                new PageInfo(date, parentUrl));
     }
 
     public Set<String> getChildPages(String parentUrl) throws IOException {
@@ -203,41 +198,6 @@ public class Spider implements Serializable {
             parentPages = new String();
         }
         return parentPages;
-    }
-
-    private boolean iscyclic(String parentUrl, String childUrl) throws IOException {
-        HashSet<String> visited = new HashSet<>();
-        // Initialize the visited set with the parentUrl to prevent immediate loop back.
-        visited.add(parentUrl);
-        return dfsCheckCycle(childUrl, parentUrl, visited);
-    }
-
-    private boolean dfsCheckCycle(String currentUrl, String targetUrl, HashSet<String> visited)
-            throws IOException {
-        // If the current URL is the same as the target URL, we've found a cycle.
-        if (currentUrl.equals(targetUrl)) {
-            return true;
-        }
-
-        // Check if already visited to avoid infinite loops
-        if (visited.contains(currentUrl)) {
-            return false; // Avoid revisiting the same URL
-        }
-
-        // Mark the current node as visited.
-        visited.add(currentUrl);
-
-        // Retrieve child pages of the current URL.
-        Set<String> childPages = getChildPages(currentUrl);
-        for (String child : childPages) {
-            // Recurse with the child as the new current URL.
-            if (!visited.contains(child) && dfsCheckCycle(child, targetUrl, visited)) {
-                return true;
-            }
-        }
-
-        // No cycle found.
-        return false;
     }
 
     private boolean needsUpdate(String url) {
