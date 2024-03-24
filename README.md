@@ -1,5 +1,19 @@
 # COMP 4321
 
+## Instructions
+
+Build and run crawler with
+
+```bash
+$ scripts/complie_and_run.sh
+```
+
+Run test program with
+
+```bash
+$ scripts/test.sh
+```
+
 ## Custom Class
 
 ## `PageInfo`
@@ -7,8 +21,9 @@
 Contains information of a page.
 | Attributes | Type | Definition |
 |------------|---------------------|------------------------|
+| `pageTitle` | `String` | Page's title|
 | `date` | `Date` | Last modification date |
-| `wordsIDCount` | `HTree` | Mapping from word's ID to word frequency.|
+| `size` | `int` | Page's size|
 | `childUrls` | `ArrayList<String>` | List of child's urls |
 | `parentUrls` | `ArrayList<String>` | List of parent's urls |
 
@@ -20,14 +35,14 @@ Mapping from URL to an unique page ID.
 ||Attribute|Type|
 |-|-|-|
 |Key|`url`|`String`|
-|Value|`pageID`|`Int`|
+|Value|`pageID`|`int`|
 
 ## `urlPageIDMapBackward`
 
 Mapping from page ID to an Url.
 ||Attribute|Type|
 |-|-|-|
-|Key|`pageID`|`Int`|
+|Key|`pageID`|`int`|
 |Value|`url`|`String`|
 
 ## `wordIDMapForward`
@@ -36,14 +51,14 @@ Mapping from word to word's ID.
 ||Attribute|Type|
 |-|-|-|
 |Key|`word`|`String`|
-|Value|`wordID`|`Int`|
+|Value|`wordID`|`int`|
 
 ## `wordIDMapBackward`
 
 Mapping from word's ID to word.
 ||Attribute|Type|
 |-|-|-|
-|Key|`wordID`|`Int`|
+|Key|`wordID`|`int`|
 |Value|`word`|`String`|
 
 ## `wordFreqMap${pageID}`
@@ -51,8 +66,8 @@ Mapping from word's ID to word.
 Mapping from word's ID to frequency in url with `${pageID}`
 ||Attribute|Type|
 |-|-|-|
-|Key|`wordID`|`Int`|
-|Value|`frequency`|`Int`|
+|Key|`wordID`|`int`|
+|Value|`frequency`|`int`|
 
 ## `parentIDPageInfoMap`
 
