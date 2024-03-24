@@ -29,6 +29,8 @@ Contains information of a page.
 
 ## Databases (`HTree`)
 
+All the data are stored in `database.db`.
+
 ## `urlPageIDMapForward`
 
 Mapping from URL to an unique page ID.
