@@ -17,6 +17,7 @@ import java.text.ParseException;
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
 import jdbm.htree.HTree;
+import porter.*;
 import jdbm.helper.FastIterator;
 import java.io.IOException;
 import java.io.Serializable;
@@ -34,6 +35,7 @@ import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 
 public class Spider implements Serializable {
     private String url;
@@ -258,6 +260,10 @@ public class Spider implements Serializable {
     private void fetchPage(String currentUrl) throws ParserException {
         // Fetch the page and perform indexing functions
         // Implement your logic here
+        Vector<String> words = extractWords(currentUrl);
+        for (String word : words) {
+            System.out.println(word);
+        }
     }
 
     public Vector<String> extractLinks(String url) throws ParserException {
@@ -276,18 +282,20 @@ public class Spider implements Serializable {
         // use StringTokenizer to tokenize the result from StringBean
         StringBean sb;
         sb = new StringBean();
-        sb.setLinks(true);
+        sb.setLinks(false);
         sb.setURL(currentUrl);
         sb.setReplaceNonBreakingSpaces(true);
         sb.setCollapse(true);
         String text = sb.getStrings();
-        String[] tokens = text.split("[ ,?]+");
+        String[] tokens = text.split("[ ,?.-]+");
         Vector<String> vec_tokens = new Vector<>();
+        Porter porter = new Porter();
         for (int i = 0; i < tokens.length; i++) {
             // lowercase and remove whitespace
             String token = tokens[i].toLowerCase().replaceAll("\\s", "");
+            // remove stopword, and run Porter Algorithm
             if (!stopWords.contains(token)) {
-                vec_tokens.add(token);
+                vec_tokens.add(porter.stripAffixes(token));
             }
 
         }
