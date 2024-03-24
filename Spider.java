@@ -40,7 +40,8 @@ import java.util.Locale;
 public class Spider implements Serializable {
     private String url;
     private int numPages;
-    private int pageID;
+    private int PAGEID;
+    private int WORDID;
     private Set<String> visitedUrls;
     private Queue<String> queue;
 
@@ -56,7 +57,8 @@ public class Spider implements Serializable {
     Spider(String _url, int num) throws IOException {
         url = _url;
         numPages = num;
-        pageID = 0;
+        PAGEID = 0;
+        WORDID = 0;
         visitedUrls = new HashSet<>();
         queue = new LinkedList<>();
 
@@ -188,26 +190,26 @@ public class Spider implements Serializable {
 
     private void addPageID(String url) throws IOException {
         Integer existingPageID = (Integer) urlPageIDMapForward.get(url);
-        
+
         if (existingPageID == null) {
             // No existing page ID found, so we assign a new one
-            urlPageIDMapForward.put(url, pageID);
-            urlPageIDMapBackward.put(pageID, url);
+            urlPageIDMapForward.put(url, PAGEID);
+            urlPageIDMapBackward.put(PAGEID, url);
 
             // Initialize PageInfo with empty lists for a new URL
             PageInfo pageInfo = new PageInfo(new Date(), new ArrayList<>(), true); // Assuming
                                                                                    // true
             // for childUrls
             // initialization
-            parentIDPageInfoMap.put(pageID, pageInfo); // Link pageID with PageInfo in forward map
+            parentIDPageInfoMap.put(PAGEID, pageInfo); // Link pageID with PageInfo in forward map
 
             PageInfo reversePageInfo = new PageInfo(new Date(), new ArrayList<>(), false); // False
             // for
             // parentUrls
-            childIDPageInfoMap.put(pageID, reversePageInfo); // Similarly for backward map
+            childIDPageInfoMap.put(PAGEID, reversePageInfo); // Similarly for backward map
 
 
-            pageID++; // Increment pageID for the next URL
+            PAGEID++; // Increment pageID for the next URL
         }
     }
 
@@ -221,8 +223,8 @@ public class Spider implements Serializable {
         int parentPageID = (int) urlPageIDMapForward.get(parentUrl);
         PageInfo parentPageInfo = (PageInfo) parentIDPageInfoMap.get(parentPageID);
         if (!parentPageInfo.getchildUrls().contains(childUrl)) {
-          parentPageInfo.addChildPage(childUrl);
-          parentIDPageInfoMap.put(parentPageID, parentPageInfo);
+            parentPageInfo.addChildPage(childUrl);
+            parentIDPageInfoMap.put(parentPageID, parentPageInfo);
         }
 
         myparser = new Parser(childUrl);
@@ -231,8 +233,8 @@ public class Spider implements Serializable {
         int childPageID = (int) urlPageIDMapForward.get(childUrl);
         PageInfo childPageInfo = (PageInfo) childIDPageInfoMap.get(childPageID);
         if (!childPageInfo.getParentUrls().contains(parentUrl)) {
-          childPageInfo.addParentUrl(parentUrl);
-          childIDPageInfoMap.put(childPageID, childPageInfo);
+            childPageInfo.addParentUrl(parentUrl);
+            childIDPageInfoMap.put(childPageID, childPageInfo);
         }
     }
 
@@ -253,12 +255,33 @@ public class Spider implements Serializable {
         return false;
     }
 
-    private void fetchPage(String currentUrl) throws ParserException {
+    private void fetchPage(String currentUrl) throws ParserException, IOException {
         // Fetch the page and perform indexing functions
         // Implement your logic here
         Vector<String> words = extractWords(currentUrl);
+        int pageID = (int) urlPageIDMapForward.get(currentUrl);
+
+        // Create word freqency database for this page
+        HTree wordFreqMap = HTree.createInstance(recman);
+        recman.setNamedObject("wordFreqMap" + pageID, wordFreqMap.getRecid());
+
+        System.out.println("URL: " + currentUrl + ", ID: " + pageID);
         for (String word : words) {
-            System.out.println(word);
+            if (wordIDMapForward.get(word) == null) {
+                WORDID++;
+                wordIDMapForward.put(word, WORDID);
+                wordIDMapBackward.put(WORDID, word);
+            }
+
+            int wordID = (int) wordIDMapForward.get(word);
+            if (wordFreqMap.get(wordID) != null) {
+                // Increase count by 1 if key exists
+                wordFreqMap.put(wordID, (int) wordFreqMap.get(wordID) + 1);
+            } else {
+                wordFreqMap.put(wordID, 1);
+            }
+            System.out.println("\tWORD: " + word + ", WORD_ID: " + wordIDMapForward.get(word)
+                    + ", COUNT: " + wordFreqMap.get(wordIDMapForward.get(word)));
         }
     }
 
