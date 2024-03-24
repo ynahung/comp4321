@@ -224,10 +224,8 @@ public class Spider implements Serializable {
 
         // Create word freqency database for this page
         HTree wordFreqMap = HTree.createInstance(recman);
-        System.out.println((String) ("wordFreqMap" + pageID));
         recman.setNamedObject((String) ("wordFreqMap" + pageID), wordFreqMap.getRecid());
 
-        System.out.println("URL: " + currentUrl + ", ID: " + pageID);
         for (String word : words) {
             if (wordIDMapForward.get(word) == null) {
                 WORDID++;
@@ -242,8 +240,6 @@ public class Spider implements Serializable {
             } else {
                 wordFreqMap.put(wordID, 1);
             }
-            System.out.println("\tWORD: " + word + ", WORD_ID: " + wordIDMapForward.get(word)
-                    + ", COUNT: " + wordFreqMap.get(wordIDMapForward.get(word)));
         }
     }
 
