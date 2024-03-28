@@ -45,38 +45,44 @@ public class Test {
         Object pageID = iter.next();
         boolean started = false;
 
-        while (pageID != null) {
+        while (pageID != null ) {
 
             String url = (String) urlPageIDMapBackward.get(pageID);
             PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(pageID);
 
-            // TODO: add page title in pageInfo
             if (!started) {
-                writer.write("PageTitlePlaceHolder");
+                writer.write(pageInfo.getPageTitle());
                 started = true;
             } else {
-                writer.write("\n" + "PageTitlePlaceHolder");
+                writer.write("\n" + pageInfo.getPageTitle());
             }
 
             writer.write("\n" + url);
 
-            // TODO: add page size in pageInfo
-            writer.write("\n" + pageInfo.getDate() + ", " + "SizePlaceHolder");
+            writer.write("\n" + pageInfo.getDate() + ", " + pageInfo.getSize());
 
 
             String keywordsFreq = "";
             int count = 1;
-            String wordFreqMapName = "wordFreqMap" + pageID;
-            HTree wordFreqMap = HTree.load(recman, recman.getNamedObject(wordFreqMapName));
-            FastIterator wordIter = wordFreqMap.keys();
+            String wordFreqMapName = "wordBodyFreqMap" + pageID;
+            HTree wordBodyFreqMap = HTree.load(recman, recman.getNamedObject(wordFreqMapName));
+            wordFreqMapName = "wordTitleFreqMap" + pageID;
+            HTree wordTitleFreqMap = HTree.load(recman, recman.getNamedObject(wordFreqMapName));
+            FastIterator wordIter = wordBodyFreqMap.keys();
             Object wordID = wordIter.next();
 
             while (wordID != null & count < 11) {
-                int wordFreq = (int) wordFreqMap.get(wordID);
+                int wordFreq = (int) wordBodyFreqMap.get(wordID);
+                if(wordTitleFreqMap.get(wordID) != null) {
+                    wordFreq += (int) wordTitleFreqMap.get(wordID);
+                }
                 keywordsFreq += (String) wordIDMapBackward.get(wordID) + " " + wordFreq + "; ";
                 wordID = wordIter.next();
                 count++;
             }
+
+
+
             writer.write("\n" + keywordsFreq);
 
             ArrayList<String> childUrls = pageInfo.getchildUrls();
