@@ -63,9 +63,17 @@ Mapping from word's ID to word.
 |Key|`wordID`|`int`|
 |Value|`word`|`String`|
 
-## `wordFreqMap${pageID}`
+## `wordBodyFreqMap${pageID}`
 
-Mapping from word's ID to frequency in url with `${pageID}`
+Mapping from word's ID to frequency in url body with `${pageID}`
+||Attribute|Type|
+|-|-|-|
+|Key|`wordID`|`int`|
+|Value|`frequency`|`int`|
+
+## `wordTitleFreqMap${pageID}`
+
+Mapping from word's ID to frequency in url title with `${pageID}`
 ||Attribute|Type|
 |-|-|-|
 |Key|`wordID`|`int`|
