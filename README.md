@@ -16,7 +16,7 @@ $ scripts/test.sh
 
 ## Custom Class
 
-## `PageInfo`
+### `PageInfo`
 
 Contains information of a page.
 | Attributes | Type | Definition |
@@ -31,7 +31,7 @@ Contains information of a page.
 
 All the data are stored in `database.db`.
 
-## `urlPageIDMapForward`
+### `urlPageIDMapForward`
 
 Mapping from URL to an unique page ID.
 ||Attribute|Type|
@@ -39,7 +39,7 @@ Mapping from URL to an unique page ID.
 |Key|`url`|`String`|
 |Value|`pageID`|`int`|
 
-## `urlPageIDMapBackward`
+### `urlPageIDMapBackward`
 
 Mapping from page ID to an Url.
 ||Attribute|Type|
@@ -47,7 +47,7 @@ Mapping from page ID to an Url.
 |Key|`pageID`|`int`|
 |Value|`url`|`String`|
 
-## `wordIDMapForward`
+### `wordIDMapForward`
 
 Mapping from word to word's ID.
 ||Attribute|Type|
@@ -55,7 +55,7 @@ Mapping from word to word's ID.
 |Key|`word`|`String`|
 |Value|`wordID`|`int`|
 
-## `wordIDMapBackward`
+### `wordIDMapBackward`
 
 Mapping from word's ID to word.
 ||Attribute|Type|
@@ -63,7 +63,7 @@ Mapping from word's ID to word.
 |Key|`wordID`|`int`|
 |Value|`word`|`String`|
 
-## `wordBodyFreqMap${pageID}`
+### `wordBodyFreqMap${pageID}`
 
 Mapping from word's ID to frequency in url body with `${pageID}`
 ||Attribute|Type|
@@ -71,7 +71,7 @@ Mapping from word's ID to frequency in url body with `${pageID}`
 |Key|`wordID`|`int`|
 |Value|`frequency`|`int`|
 
-## `wordTitleFreqMap${pageID}`
+### `wordTitleFreqMap${pageID}`
 
 Mapping from word's ID to frequency in url title with `${pageID}`
 ||Attribute|Type|
@@ -79,7 +79,7 @@ Mapping from word's ID to frequency in url title with `${pageID}`
 |Key|`wordID`|`int`|
 |Value|`frequency`|`int`|
 
-## `parentIDPageInfoMap`
+### `parentIDPageInfoMap`
 
 Mapping from parent pages to the page information.
 ||Attribute|Type|
@@ -87,7 +87,7 @@ Mapping from parent pages to the page information.
 |Key|`parentUrl`|`String`|
 |Value|`page_info`|`PageInfo`|
 
-## `childIDPageInfoMap`
+### `childIDPageInfoMap`
 
 Mapping from child pages to the page information.
 ||Attribute|Type|
@@ -96,3 +96,12 @@ Mapping from child pages to the page information.
 |Value|`page_info`|`PageInfo`|
 
 ---
+
+## Indexing
+
+We index web pages base on the following logic:
+
+1. We split lines into tokens using space and other speical charaters.
+2. We set tokens to lowercase.
+3. We remove all the words listed in `stopword.txt`.
+4. We use Porter's algorithm to strip token's affiexes.
