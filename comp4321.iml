@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jdbm-1.0" level="project" />
     <orderEntry type="library" name="htmlparser" level="project" />
+    <orderEntry type="library" name="jsoup-1.7.2" level="project" />
   </component>
 </module>

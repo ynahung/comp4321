@@ -1,34 +1,26 @@
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
-import java.text.ParseException;
-import java.util.*;
-
-import org.htmlparser.beans.StringBean;
-import org.htmlparser.Node;
-import org.htmlparser.NodeFilter;
-import org.htmlparser.Parser;
-import org.htmlparser.filters.AndFilter;
-import org.htmlparser.filters.NodeClassFilter;
-import org.htmlparser.tags.LinkTag;
-import org.htmlparser.util.NodeList;
-import org.htmlparser.util.ParserException;
-import org.htmlparser.beans.LinkBean;
-import java.net.URL;
-
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
+import jdbm.helper.FastIterator;
 import jdbm.htree.HTree;
+import org.htmlparser.beans.LinkBean;
+import org.htmlparser.util.ParserException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import src.*;
-import jdbm.helper.FastIterator;
-import java.io.IOException;
-import java.io.Serializable;
+import src.PageInfo;
+import src.Porter;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.ParseException;
+import java.util.*;
 
 public class Spider implements Serializable {
     private String url;
@@ -71,7 +63,6 @@ public class Spider implements Serializable {
         recman.setNamedObject("parentIDPageInfoMap", parentIDPageInfoMap.getRecid());
         childIDPageInfoMap = HTree.createInstance(recman);
         recman.setNamedObject("childIDPageInfoMap", childIDPageInfoMap.getRecid());
-
 
 
         // Reading stopwords.txt
@@ -291,49 +282,35 @@ public class Spider implements Serializable {
         return vec_links;
     }
 
-    public ArrayList<String> extractWords(String currentUrl) throws ParserException, IOException {
-        ArrayList<String> vec_tokens = new ArrayList<>();
-        Document doc = Jsoup.connect(currentUrl).get();
-        Elements bodyElements = doc.select("body");
+    public ArrayList<String> extractAndProcessText(Document doc, String cssQuery) throws IOException {
+        ArrayList<String> processedTokens = new ArrayList<>();
+        Elements elements = doc.select(cssQuery);
 
-        for (Element element : bodyElements) {
+        for (Element element : elements) {
             String text = element.text();
             String[] tokens = text.split("[ ,@%^&*!#$/|©:+=~`?.-]+");
             Porter porter = new Porter();
             for (String token : tokens) {
-                token = token.toLowerCase().replaceAll("\\s", "");
-                // remove stopword, and run Porter Algorithm
-                if (!stopWords.contains(token)) {
-                    String temp = porter.stripAffixes(token);
-                    if(!temp.trim().isEmpty()) {
-                        vec_tokens.add(temp);
+                token = token.toLowerCase().replaceAll("\\s+", "");
+                if (!stopWords.contains(token) && !token.isEmpty()) {
+                    String processedToken = porter.stripAffixes(token);
+                    if (!processedToken.isEmpty()) {
+                        processedTokens.add(processedToken);
                     }
                 }
             }
         }
-        return vec_tokens;
+        return processedTokens;
+    }
+
+    public ArrayList<String> extractWords(String currentUrl) throws ParserException, IOException {
+        Document doc = Jsoup.connect(currentUrl).get();
+        return extractAndProcessText(doc, "body");
     }
 
     public ArrayList<String> extractTitle(String currentUrl) throws ParserException, IOException {
-        ArrayList<String> vec_tokens = new ArrayList<>();
         Document doc = Jsoup.connect(currentUrl).get();
-        Elements bodyElements = doc.select("title");
-
-        for (Element element : bodyElements) {
-            String text = element.text();
-            String[] tokens = text.split("[ ,@%^&*!#$/|©:+=~`?.-]+");
-            Porter porter = new Porter();
-            for (String token : tokens) {
-                token = token.toLowerCase().replaceAll("\\s", "");
-                // remove stopword, and run Porter Algorithm
-                if (!stopWords.contains(token)) {
-                    String temp = porter.stripAffixes(token);
-                    if(!temp.trim().isEmpty()) {
-                        vec_tokens.add(temp);
-                    }
-                }
-            }
-        }
-        return vec_tokens;
+        return extractAndProcessText(doc, "title");
     }
 }
+
