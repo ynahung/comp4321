@@ -21,6 +21,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Spider implements Serializable {
     private String url;
@@ -288,6 +289,10 @@ public class Spider implements Serializable {
 
         for (Element element : elements) {
             String text = element.text();
+
+            // Replace specific phrases with underscores before tokenization
+            text = replacePhrasesWithUnderscores(text);
+
             String[] tokens = text.split("[ ,@%^&*!#$/|©:+=~`?.-]+");
             Porter porter = new Porter();
             for (String token : tokens) {
@@ -301,6 +306,27 @@ public class Spider implements Serializable {
             }
         }
         return processedTokens;
+    }
+
+    private String replacePhrasesWithUnderscores(String text) {
+        // Tokenize the text into words
+        String[] words = text.split("\\s+");
+        // Determine the frequency of each bigram
+        Map<String, Integer> bigramFrequencies = new HashMap<>();
+        for (int i = 0; i < words.length - 1; i++) {
+            String bigram = words[i] + " " + words[i + 1];
+            bigramFrequencies.put(bigram, bigramFrequencies.getOrDefault(bigram, 0) + 1);
+        }
+        // Identify bigrams that occur frequently
+        List<String> frequentPhrases = bigramFrequencies.entrySet().stream()
+                .filter(entry -> entry.getValue() > 1) // Threshold for frequency
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+        // Replace spaces with underscores in frequent phrases
+        for (String phrase : frequentPhrases) {
+            text = text.replace(phrase, phrase.replace(" ", "_"));
+        }
+        return text;
     }
 
     public ArrayList<String> extractWords(String currentUrl) throws ParserException, IOException {

@@ -20,7 +20,7 @@ public class Porter {
       String temp = "";
 
       for (int i = 0; i < last; i++) {
-         if (ch.isLetterOrDigit(str.charAt(i)))
+         if (ch.isLetterOrDigit(str.charAt(i)) || str.charAt(i) == '_')
             temp += str.charAt(i);
       }
 
