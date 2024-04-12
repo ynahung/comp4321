@@ -73,13 +73,10 @@ public class SearchEngine {
         List<String> processedTerms = new ArrayList<>();
         Matcher m = Pattern.compile("\"([^\"]*)\"|(\\S+)").matcher(queryString.toLowerCase());
         while (m.find()) {
-            if (m.group(1) != null) { // Phrase found
-                // Split phrase into words, process each, and reassemble (could also be indexed as phrases directly)
-                String[] words = m.group(1).split("\\s+");
-                for (String word : words) {
-                    if (!stopWords.contains(word)) {
-                        processedTerms.add(porter.stripAffixes(word));
-                    }
+            if (m.group(1) != null) { // Handle phrases
+                String phrase = m.group(1).replace(" ", "_"); // Replace spaces with underscores for phrase indexing
+                if (!stopWords.contains(phrase)) {
+                    processedTerms.add(porter.stripAffixes(phrase));
                 }
             } else if (m.group(2) != null) { // Single word
                 String term = m.group(2);
@@ -118,6 +115,7 @@ public class SearchEngine {
         int totalFrequency = 0;
         HTree bodyFreqMap = getFrequencyMap(docId, "wordBodyFreqMap");
         HTree titleFreqMap = getFrequencyMap(docId, "wordTitleFreqMap");
+        int titleWeight = 1; // Weight factor for title matches
 
         if (bodyFreqMap != null) {
             Integer bodyFrequency = (Integer) bodyFreqMap.get(wordID);
@@ -126,7 +124,7 @@ public class SearchEngine {
 
         if (titleFreqMap != null) {
             Integer titleFrequency = (Integer) titleFreqMap.get(wordID);
-            totalFrequency += (titleFrequency != null ? titleFrequency : 0);
+            totalFrequency += (titleFrequency != null ? titleFrequency * titleWeight : 0);
         }
 
         return totalFrequency;
@@ -190,22 +188,19 @@ public class SearchEngine {
     }
 
     // Calculating the TF-IDF value for a term in a document
-    private double tfIdf(int termFrequency, int docFrequency, int totalDocs) {
+    private double tfIdf(int termFrequency, int docFrequency, int totalDocs, double docLength) {
         if (termFrequency == 0 || docFrequency == 0) {
             return 0; // Return 0 if term frequency or document frequency is zero to avoid log(0)
         }
         double tf = 1 + Math.log(termFrequency); // Log-normalized frequency: 1 + log(tf)
         double idf = Math.log((double) totalDocs / docFrequency); // Standard IDF formula
-        double tfIdfScore = tf * idf;
-        return tf * idf;
+        double tfIdfScore = (tf * idf) / (docLength == 0 ? 1 : Math.sqrt(docLength)); // Adjust for document length
+        return tfIdfScore;
     }
 
     // Normalize the scores
     private double normalize(Map<Integer, Double> scores, Integer docId) {
-        double sum = 0.0;
-        for (Double score : scores.values()) {
-            sum += score * score;
-        }
+        double sum = scores.values().stream().mapToDouble(score -> score * score).sum();
         return (sum == 0) ? 0 : scores.get(docId) / Math.sqrt(sum);
     }
 
@@ -222,7 +217,8 @@ public class SearchEngine {
 
             for (Integer docId : documentsWithTerm) {
                 int termFrequency = getTermFrequency(docId, term);
-                double score = tfIdf(termFrequency, docFrequency, totalDocuments);
+                double docLength = getDocumentLength(docId);
+                double score = tfIdf(termFrequency, docFrequency, totalDocuments, docLength);
 
                 System.out.println("Document ID: " + docId + ", Term Frequency: " + termFrequency + ", Score: " + score);
 
@@ -253,7 +249,7 @@ public class SearchEngine {
         
         // Calculate document scores based on the processed query
         Map<Integer, Double> documentScores = calculateDocumentScores(processedQueryTerms);
-        System.out.println("Document Scores: " + documentScores);
+        System.out.println("Normalized Document Scores: " + documentScores);
         
         // Sort document scores to rank documents
         List<Map.Entry<Integer, Double>> sortedDocuments = new ArrayList<>(documentScores.entrySet());
