@@ -53,6 +53,8 @@ public class SearchEngine {
         loadStopWords(STOPWORDS_FILE_PATH); // Load stop words from file
 
         porter = new Porter();
+
+        numPages = 30; // Update this to the actual number of indexed pages
     }
 
     private void loadStopWords(String filePath) throws IOException {
@@ -67,47 +69,18 @@ public class SearchEngine {
         }
     }
 
-    private int getDocumentFrequency(String term) throws IOException {
-        Integer wordID = (Integer) wordIDMapForward.get(term);
-        if (wordID == null) {
-            return 0; // Term not found in the index.
-        }
-        long recid = recman.getNamedObject("documentWordFreqMap" + wordID);
-        if (recid == 0) {
-            return 0; // No HTree exists for this wordID.
-        }
-        HTree documentWordFreq = HTree.load(recman, recid);
-        FastIterator iter = documentWordFreq.keys();
-        int docCount = 0;
-        while (iter.next() != null) {
-            docCount++;
-        }
-        return docCount;
-    }
-
-    private int getTermFrequency(Integer docId, String term) throws IOException {
-        Integer wordID = (Integer) wordIDMapForward.get(term);
-        if (wordID == null) {
-            return 0; // Term not found in the index.
-        }
-        long recid = recman.getNamedObject("documentWordFreqMap" + wordID);
-        if (recid == 0) {
-            return 0; // No HTree exists for this wordID.
-        }
-        HTree documentWordFreq = HTree.load(recman, recid);
-        Integer frequency = (Integer) documentWordFreq.get(docId);
-        if (frequency == null) {
-            return 0; // The term does not appear in this specific document.
-        }
-        return frequency;
-    }
-
     private List<String> processQuery(String queryString) {
         List<String> processedTerms = new ArrayList<>();
         Matcher m = Pattern.compile("\"([^\"]*)\"|(\\S+)").matcher(queryString.toLowerCase());
         while (m.find()) {
-            if (m.group(1) != null) { // Phrase
-                processedTerms.add(porter.stripAffixes(m.group(1))); // Modify to handle phrases appropriately
+            if (m.group(1) != null) { // Phrase found
+                // Split phrase into words, process each, and reassemble (could also be indexed as phrases directly)
+                String[] words = m.group(1).split("\\s+");
+                for (String word : words) {
+                    if (!stopWords.contains(word)) {
+                        processedTerms.add(porter.stripAffixes(word));
+                    }
+                }
             } else if (m.group(2) != null) { // Single word
                 String term = m.group(2);
                 if (!stopWords.contains(term)) {
@@ -118,43 +91,82 @@ public class SearchEngine {
         return processedTerms;
     }
 
+    // Helper to fetch frequency map by document ID and map name prefix
+    private HTree getFrequencyMap(long docId, String mapPrefix) throws IOException {
+        long recid = recman.getNamedObject(mapPrefix + docId);
+        if (recid != 0) {
+            return HTree.load(recman, recid);
+        }
+        return null;  // Return null if map doesn't exist
+    }
+
+    // Helper to check if term is present in the frequency map and optionally count frequency
+    private boolean isTermPresentInMap(HTree freqMap, Integer wordID, boolean countFrequency) throws IOException {
+        if (freqMap != null) {
+            Integer frequency = (Integer) freqMap.get(wordID);
+            if (frequency != null && (countFrequency || frequency > 0)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getTermFrequency(Integer docId, String term) throws IOException {
+        Integer wordID = (Integer) wordIDMapForward.get(term);
+        if (wordID == null) return 0;
+        
+        int totalFrequency = 0;
+        HTree bodyFreqMap = getFrequencyMap(docId, "wordBodyFreqMap");
+        HTree titleFreqMap = getFrequencyMap(docId, "wordTitleFreqMap");
+
+        if (bodyFreqMap != null) {
+            Integer bodyFrequency = (Integer) bodyFreqMap.get(wordID);
+            totalFrequency += (bodyFrequency != null ? bodyFrequency : 0);
+        }
+
+        if (titleFreqMap != null) {
+            Integer titleFrequency = (Integer) titleFreqMap.get(wordID);
+            totalFrequency += (titleFrequency != null ? titleFrequency : 0);
+        }
+
+        return totalFrequency;
+    }
+
+    private int getDocumentFrequency(String term) throws IOException {
+        Integer wordID = (Integer) wordIDMapForward.get(term);
+        if (wordID == null) return 0;
+        int docFrequency = 0;
+
+        FastIterator docIdIter = parentIDPageInfoMap.keys();
+        Integer docId;
+        while ((docId = (Integer) docIdIter.next()) != null) {
+            HTree bodyFreqMap = getFrequencyMap(docId, "wordBodyFreqMap");
+            HTree titleFreqMap = getFrequencyMap(docId, "wordTitleFreqMap");
+
+            // Check both maps for presence of the term
+            if (isTermPresentInMap(bodyFreqMap, wordID, false) || isTermPresentInMap(titleFreqMap, wordID, false)) {
+                docFrequency++;
+            }
+        }
+
+        return docFrequency;
+    }
+
     private List<Integer> getDocumentsWithTerm(String term) throws IOException {
         List<Integer> documents = new ArrayList<>();
         Integer wordID = (Integer) wordIDMapForward.get(term);
         if (wordID == null) {
             return documents; // Return an empty list if the term is not indexed
         }
-        
-        // Iterate through all documents to find occurrences of the term
+
         FastIterator docIdIter = parentIDPageInfoMap.keys();
         Integer docId;
         while ((docId = (Integer) docIdIter.next()) != null) {
-            boolean found = false;
-            
-            // Check body frequency map
-            long recid = recman.getNamedObject("wordBodyFreqMap" + docId);
-            if (recid != 0) {
-                HTree wordBodyFreqMap = HTree.load(recman, recid);
-                Integer frequency = (Integer) wordBodyFreqMap.get(wordID);
-                if (frequency != null && frequency > 0) {
-                    found = true;
-                }
-            }
-            
-            // Check title frequency map if not found in body
-            if (!found) {
-                recid = recman.getNamedObject("wordTitleFreqMap" + docId);
-                if (recid != 0) {
-                    HTree wordTitleFreqMap = HTree.load(recman, recid);
-                    Integer frequency = (Integer) wordTitleFreqMap.get(wordID);
-                    if (frequency != null && frequency > 0) {
-                        found = true;
-                    }
-                }
-            }
-            
-            // If the term is found in either the body or title, add the document ID to the list
-            if (found) {
+            HTree bodyFreqMap = getFrequencyMap(docId, "wordBodyFreqMap");
+            HTree titleFreqMap = getFrequencyMap(docId, "wordTitleFreqMap");
+
+            // Check if the term is found in either the body or title
+            if (isTermPresentInMap(bodyFreqMap, wordID, true) || isTermPresentInMap(titleFreqMap, wordID, true)) {
                 documents.add(docId);
             }
         }
@@ -177,57 +189,58 @@ public class SearchEngine {
         return pageInfo != null ? pageInfo.getPageTitle() : null;
     }
 
+    // Calculating the TF-IDF value for a term in a document
+    private double tfIdf(int termFrequency, int docFrequency, int totalDocs) {
+        if (termFrequency == 0 || docFrequency == 0) {
+            return 0; // Return 0 if term frequency or document frequency is zero to avoid log(0)
+        }
+        double tf = 1 + Math.log(termFrequency); // Log-normalized frequency: 1 + log(tf)
+        double idf = Math.log((double) totalDocs / docFrequency); // Standard IDF formula
+        double tfIdfScore = tf * idf;
+        return tf * idf;
+    }
+
+    // Normalize the scores
+    private double normalize(Map<Integer, Double> scores, Integer docId) {
+        double sum = 0.0;
+        for (Double score : scores.values()) {
+            sum += score * score;
+        }
+        return (sum == 0) ? 0 : scores.get(docId) / Math.sqrt(sum);
+    }
+
     // Method to calculate document scores based on the processed query
     private Map<Integer, Double> calculateDocumentScores(List<String> processedQueryTerms) throws IOException {
-        Map<String, Integer> documentFrequencies = new HashMap<>();
-        Map<String, Double> termIDFs = new HashMap<>();
         Map<Integer, Double> documentScores = new HashMap<>();
-        int totalDocuments = numPages; // Assuming numPages is the total count of documents indexed
+        int totalDocuments = numPages; // Update this to the actual number of documents indexed
 
-        // Calculate Document Frequencies (DF) for query terms
         for (String term : processedQueryTerms) {
-            int df = getDocumentFrequency(term);
-            documentFrequencies.put(term, df);
-        }
-        System.out.println("Document Frequencies: " + documentFrequencies);
-
-        // Pre-compute IDF for all query terms
-        for (String term : processedQueryTerms) {
-            int df = documentFrequencies.get(term);
-            double idf = (df == 0) ? 0 : Math.log((double) totalDocuments / (df + 1));
-            termIDFs.put(term, idf);
-        }
-        System.out.println("Term IDFs: " + termIDFs);
-
-        // Calculate TF-IDF for each document for each query term
-        for (String term : processedQueryTerms) {
-            double idf = termIDFs.get(term); // Get pre-computed IDF
-
+            int docFrequency = getDocumentFrequency(term);
             List<Integer> documentsWithTerm = getDocumentsWithTerm(term);
-            for (Integer docId : documentsWithTerm) {
-                int tf = getTermFrequency(docId, term); // Use TF from the document
-                double tfIdf = tf * idf;
 
-                // Accumulate TF-IDF scores for each document
-                documentScores.put(docId, documentScores.getOrDefault(docId, 0.0) + tfIdf);
+            System.out.println("Term: " + term + ", Document Frequency: " + docFrequency);
+
+            for (Integer docId : documentsWithTerm) {
+                int termFrequency = getTermFrequency(docId, term);
+                double score = tfIdf(termFrequency, docFrequency, totalDocuments);
+
+                System.out.println("Document ID: " + docId + ", Term Frequency: " + termFrequency + ", Score: " + score);
+
+                documentScores.put(docId, documentScores.getOrDefault(docId, 0.0) + score);
             }
         }
-        System.out.println("Document Scores (TF-IDF): " + documentScores);
 
-        // Normalize document scores (part of cosine similarity calculation)
-        for (Map.Entry<Integer, Double> entry : documentScores.entrySet()) {
-            Integer docId = entry.getKey();
-            Double score = entry.getValue();
+        System.out.println("Pre-normalization Scores: " + documentScores);
 
-            // Assuming a method getDocumentLength(docId) that returns the length of the document vector
-            double length = getDocumentLength(docId);
-            double normalizedScore = score / (length + 1e-10); // Add a small number to avoid division by zero
-
-            documentScores.put(docId, normalizedScore);
+        // Normalize scores
+        Map<Integer, Double> normalizedScores = new HashMap<>();
+        for (Integer docId : documentScores.keySet()) {
+            double normalizedScore = normalize(documentScores, docId);
+            normalizedScores.put(docId, normalizedScore);
+            System.out.println("Document ID: " + docId + ", Normalized Score: " + normalizedScore);
         }
-        System.out.println("Normalized Document Scores: " + documentScores);
 
-        return documentScores;
+        return normalizedScores;
     }
 
     // Method to retrieve document URL by document ID
