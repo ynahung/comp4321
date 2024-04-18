@@ -45,7 +45,7 @@ public class Test {
         Object pageID = iter.next();
         boolean started = false;
 
-        while (pageID != null ) {
+        while (pageID != null) {
 
             String url = (String) urlPageIDMapBackward.get(pageID);
             PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(pageID);
@@ -73,7 +73,7 @@ public class Test {
 
             while (wordID != null & count < 11) {
                 int wordFreq = (int) wordBodyFreqMap.get(wordID);
-                if(wordTitleFreqMap.get(wordID) != null) {
+                if (wordTitleFreqMap.get(wordID) != null) {
                     wordFreq += (int) wordTitleFreqMap.get(wordID);
                 }
                 keywordsFreq += (String) wordIDMapBackward.get(wordID) + " " + wordFreq + "; ";
@@ -86,8 +86,13 @@ public class Test {
             writer.write("\n" + keywordsFreq);
 
             ArrayList<String> childUrls = pageInfo.getchildUrls();
+            count = 1;
             for (String childUrl : childUrls) {
+                if (count >= 11) {
+                    break;
+                }
                 writer.write("\n" + childUrl);
+                count++;
             }
 
             writer.write(
