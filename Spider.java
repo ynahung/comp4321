@@ -82,7 +82,7 @@ public class Spider implements Serializable {
     public static void main(String[] args) {
         try {
             Spider mySpider =
-                    new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 30);
+                    new Spider("https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm", 300);
             mySpider.crawl();
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,16 +132,16 @@ public class Spider implements Serializable {
         URLConnection conn = null;
         try {
             conn = url1.openConnection();
-            if(conn instanceof HttpURLConnection) {
-                ((HttpURLConnection)conn).setRequestMethod("HEAD");
+            if (conn instanceof HttpURLConnection) {
+                ((HttpURLConnection) conn).setRequestMethod("HEAD");
             }
             conn.getInputStream();
             return conn.getContentLength();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            if(conn instanceof HttpURLConnection) {
-                ((HttpURLConnection)conn).disconnect();
+            if (conn instanceof HttpURLConnection) {
+                ((HttpURLConnection) conn).disconnect();
             }
         }
     }
@@ -155,13 +155,15 @@ public class Spider implements Serializable {
             urlPageIDMapBackward.put(PAGEID, url);
 
             // Initialize PageInfo with empty lists for a new URL
-            PageInfo pageInfo = new PageInfo(getDate(url), getSize(url), new ArrayList<>(), true, getTitle(url)); // Assuming
-                                                                                   // true
+            PageInfo pageInfo = new PageInfo(getDate(url), getSize(url), new ArrayList<>(), true,
+                    getTitle(url)); // Assuming
+            // true
             // for childUrls
             // initialization
             parentIDPageInfoMap.put(PAGEID, pageInfo); // Link pageID with PageInfo in forward map
 
-            PageInfo reversePageInfo = new PageInfo(getDate(url), getSize(url), new ArrayList<>(), false, getTitle(url)); // False
+            PageInfo reversePageInfo = new PageInfo(getDate(url), getSize(url), new ArrayList<>(),
+                    false, getTitle(url)); // False
             // for
             // parentUrls
             childIDPageInfoMap.put(PAGEID, reversePageInfo); // Similarly for backward map
@@ -227,7 +229,7 @@ public class Spider implements Serializable {
     private void fetchPage(String currentUrl) throws ParserException, IOException {
         // Fetch the page body and perform indexing functions
         ArrayList<String> words = extractWords(currentUrl);
-        int pageID = (int)urlPageIDMapForward.get(currentUrl);
+        int pageID = (int) urlPageIDMapForward.get(currentUrl);
 
         // Create word frequency database for this page
         HTree wordBodyFreqMap = HTree.createInstance(recman);
@@ -240,10 +242,10 @@ public class Spider implements Serializable {
                 wordIDMapBackward.put(WORDID, word);
             }
 
-            int wordID = (int)wordIDMapForward.get(word);
+            int wordID = (int) wordIDMapForward.get(word);
             if (wordBodyFreqMap.get(wordID) != null) {
                 // Increase count by 1 if key exists
-                wordBodyFreqMap.put(wordID, (int)wordBodyFreqMap.get(wordID) + 1);
+                wordBodyFreqMap.put(wordID, (int) wordBodyFreqMap.get(wordID) + 1);
             } else {
                 wordBodyFreqMap.put(wordID, 1);
             }
@@ -262,10 +264,10 @@ public class Spider implements Serializable {
                 wordIDMapBackward.put(WORDID, word);
             }
 
-            int wordID = (int)wordIDMapForward.get(word);
+            int wordID = (int) wordIDMapForward.get(word);
             if (wordTitleFreqMap.get(wordID) != null) {
                 // Increase count by 1 if key exists
-                wordTitleFreqMap.put(wordID, (int)wordTitleFreqMap.get(wordID) + 1);
+                wordTitleFreqMap.put(wordID, (int) wordTitleFreqMap.get(wordID) + 1);
             } else {
                 wordTitleFreqMap.put(wordID, 1);
             }
@@ -283,7 +285,8 @@ public class Spider implements Serializable {
         return vec_links;
     }
 
-    public ArrayList<String> extractAndProcessText(Document doc, String cssQuery) throws IOException {
+    public ArrayList<String> extractAndProcessText(Document doc, String cssQuery)
+            throws IOException {
         ArrayList<String> processedTokens = new ArrayList<>();
         Elements elements = doc.select(cssQuery);
 
@@ -318,10 +321,11 @@ public class Spider implements Serializable {
             bigramFrequencies.put(bigram, bigramFrequencies.getOrDefault(bigram, 0) + 1);
         }
         // Identify bigrams that occur frequently
-        List<String> frequentPhrases = bigramFrequencies.entrySet().stream()
-                .filter(entry -> entry.getValue() > 1) // Threshold for frequency
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+        List<String> frequentPhrases =
+                bigramFrequencies.entrySet().stream().filter(entry -> entry.getValue() > 1) // Threshold
+                                                                                            // for
+                                                                                            // frequency
+                        .map(Map.Entry::getKey).collect(Collectors.toList());
         // Replace spaces with underscores in frequent phrases
         for (String phrase : frequentPhrases) {
             text = text.replace(phrase, phrase.replace(" ", "_"));
