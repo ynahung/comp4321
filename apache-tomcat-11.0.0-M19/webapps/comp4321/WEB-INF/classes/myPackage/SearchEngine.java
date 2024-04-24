@@ -2,8 +2,9 @@ import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
 import jdbm.helper.FastIterator;
 import jdbm.htree.HTree;
-import src.Porter;
 import src.PageInfo;
+import src.Porter;
+import src.SearchResult;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -271,23 +272,6 @@ public class SearchEngine {
         }
         
         return searchResults;
-    }
-
-    // SearchResult class to hold the search result details
-    public static class SearchResult {
-        private String url;
-        private String title;
-        private Double score;
-
-        public SearchResult(String url, String title, Double score) {
-            this.url = url;
-            this.title = title;
-            this.score = score;
-        }
-
-        public String getUrl() { return url; }
-        public String getTitle() { return title; }
-        public Double getScore() { return score; }
     }
 
     // Main method for testing
