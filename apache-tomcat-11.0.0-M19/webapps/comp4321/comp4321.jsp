@@ -1,7 +1,7 @@
 <%@ page import="java.util.*" %>
 
 <%@ page import="myPackage.SearchEngine" %>
-<%@ page import="src.SearchResult" %>
+<%@ page import="myPackage.SearchEngine.SearchResult" %>
 
 
 <html>
