@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class PageInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private transient Date date;
-    private transient ArrayList<String> childUrls;
-    private transient ArrayList<String> parentUrls;
-    private transient long size;
-    private transient String pageTitle;
+    private Date date;
+    private ArrayList<String> childUrls;
+    private ArrayList<String> parentUrls;
+    private long size;
+    private String pageTitle;
 
     public PageInfo(Date date, Long size, ArrayList<String> pages, boolean isChild, String pageTitle) {
         this.date = date;

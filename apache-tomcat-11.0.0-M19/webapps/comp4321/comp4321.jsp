@@ -1,4 +1,4 @@
-<%@ page import="src.SearchEngine" %>
+<%@ page language="java" import="searchEngine.*" %>
 
 <html>
 <body>
@@ -11,7 +11,7 @@ if(request.getParameter("query")!="")
 
     SearchEngine searchEngine = new SearchEngine();
     String results = searchEngine.searchString(query);
-    System.out.println(results);
+    out.println(results);
 }
 else
 {
