@@ -27,7 +27,9 @@ if(request.getParameter("query")!="")
             %><a href=<%=childUrl%>><%=childUrl%></a><br></br><%
             count++;
         }
+        %><hr><%
     }
+
 }
 else
 {
