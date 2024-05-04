@@ -1,0 +1,1426 @@
+29-Apr-2024 00:12:01.438 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 00:12:01.439 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 00:12:01.441 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@6326d182')
+29-Apr-2024 00:12:13.326 嚴重 [http-nio-8080-exec-3] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: [14] in the generated java file: [C:\Users\kevin\Documents\GitHub\comp4321\apache-tomcat-11.0.0-M19\work\Catalina\localhost\comp4321\org\apache\jsp\comp4321_jsp.java]
+The import SearchEngine cannot be resolved
+
+An error occurred at line: [12] in the jsp file: [/comp4321.jsp]
+SearchEngine cannot be resolved
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     String results = SearchEngine.searchString(query);
+13:     System.out.println(results);
+14: }
+15: else
+
+
+Stacktrace:] with root cause
+	org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: [14] in the generated java file: [C:\Users\kevin\Documents\GitHub\comp4321\apache-tomcat-11.0.0-M19\work\Catalina\localhost\comp4321\org\apache\jsp\comp4321_jsp.java]
+The import SearchEngine cannot be resolved
+
+An error occurred at line: [12] in the jsp file: [/comp4321.jsp]
+SearchEngine cannot be resolved
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     String results = SearchEngine.searchString(query);
+13:     System.out.println(results);
+14: }
+15: else
+
+
+Stacktrace:
+		at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+		at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:214)
+		at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:512)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:402)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:372)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:356)
+		at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:602)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:396)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 00:15:06.418 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 00:15:06.418 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 00:15:06.423 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@5be067de')
+29-Apr-2024 00:15:06.690 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextDestroyed()
+29-Apr-2024 00:15:06.690 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextDestroyed()
+29-Apr-2024 00:15:13.785 嚴重 [http-nio-8080-exec-2] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: [12] in the jsp file: [/comp4321.jsp]
+searchEngine cannot be resolved to a type
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     Object searchEngine = new searchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+
+
+An error occurred at line: [13] in the jsp file: [/comp4321.jsp]
+The method searchString(String) is undefined for the type Object
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     Object searchEngine = new searchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: [12] in the jsp file: [/comp4321.jsp]
+searchEngine cannot be resolved to a type
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     Object searchEngine = new searchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+
+
+An error occurred at line: [13] in the jsp file: [/comp4321.jsp]
+The method searchString(String) is undefined for the type Object
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     Object searchEngine = new searchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:
+		at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+		at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:214)
+		at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:512)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:402)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:372)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:356)
+		at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:602)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:396)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 00:21:31.092 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 00:21:31.096 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 00:21:31.108 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@7383eae2')
+29-Apr-2024 00:21:31.655 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextDestroyed()
+29-Apr-2024 00:21:31.655 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextDestroyed()
+29-Apr-2024 00:21:56.444 嚴重 [http-nio-8080-exec-4] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [Unable to compile class for JSP: 
+
+An error occurred at line: [13] in the jsp file: [/comp4321.jsp]
+The method searchString(String) is undefined for the type SearchEngine
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	org.apache.jasper.JasperException: Unable to compile class for JSP: 
+
+An error occurred at line: [13] in the jsp file: [/comp4321.jsp]
+The method searchString(String) is undefined for the type SearchEngine
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:
+		at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+		at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:214)
+		at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:512)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:402)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:372)
+		at org.apache.jasper.compiler.Compiler.compile(Compiler.java:356)
+		at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:602)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:396)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 00:23:24.357 嚴重 [http-nio-8080-exec-5] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [/comp4321.jsp] at line [12]
+
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: SearchEngine
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1201)
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1035)
+		at org.apache.jasper.servlet.JasperLoader.loadClass(JasperLoader.java:97)
+		at org.apache.jasper.servlet.JasperLoader.loadClass(JasperLoader.java:51)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:134)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 00:23:41.602 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 00:23:41.602 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 00:23:41.606 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@475835b1')
+29-Apr-2024 00:23:51.555 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [12]
+
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: SearchEngine
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1201)
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1035)
+		at org.apache.jasper.servlet.JasperLoader.loadClass(JasperLoader.java:97)
+		at org.apache.jasper.servlet.JasperLoader.loadClass(JasperLoader.java:51)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:134)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 00:27:07.990 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 00:27:07.991 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 00:27:07.994 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@6ecdbab8')
+29-Apr-2024 00:27:19.736 嚴重 [http-nio-8080-exec-3] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [12]
+
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: SearchEngine
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1201)
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1035)
+		at org.apache.jasper.servlet.JasperLoader.loadClass(JasperLoader.java:97)
+		at org.apache.jasper.servlet.JasperLoader.loadClass(JasperLoader.java:51)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:134)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 00:33:47.853 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 00:33:47.854 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 00:33:47.857 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@6ecdbab8')
+29-Apr-2024 00:34:31.665 嚴重 [http-nio-8080-exec-2] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [/comp4321.jsp] at line [12]
+
+9:     String query = request.getParameter("query");
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.Porter
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1201)
+		at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1035)
+		at mypackage.SearchEngine.<init>(SearchEngine.java:57)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:134)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:16:17.102 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:16:17.102 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:16:17.105 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@35eb4a3b')
+29-Apr-2024 01:17:23.590 嚴重 [http-nio-8080-exec-2] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at mypackage.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at mypackage.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at mypackage.SearchEngine.search(SearchEngine.java:253)
+		at mypackage.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:18:44.348 嚴重 [http-nio-8080-exec-3] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at mypackage.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at mypackage.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at mypackage.SearchEngine.search(SearchEngine.java:253)
+		at mypackage.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:26:51.547 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:26:51.547 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:26:51.551 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@6a4ccef7')
+29-Apr-2024 01:26:59.196 嚴重 [http-nio-8080-exec-3] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at mypackage.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at mypackage.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at mypackage.SearchEngine.search(SearchEngine.java:253)
+		at mypackage.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:28:36.046 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:28:36.047 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:28:36.050 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@3dd4a6fa')
+29-Apr-2024 01:28:43.014 嚴重 [http-nio-8080-exec-2] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [/comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:33:14.918 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:33:14.918 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:33:14.920 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@35eb4a3b')
+29-Apr-2024 01:33:37.114 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:34:23.997 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:34:23.997 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:34:24.000 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@35eb4a3b')
+29-Apr-2024 01:37:49.612 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:37:49.612 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:37:49.617 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@49ede9c7')
+29-Apr-2024 01:39:48.527 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:39:48.527 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:39:48.530 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@35eb4a3b')
+29-Apr-2024 01:40:13.800 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:40:54.805 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:40:54.806 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:40:54.808 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@3dd4a6fa')
+29-Apr-2024 01:40:58.053 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:41:24.215 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:41:24.215 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:41:24.218 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@3f725306')
+29-Apr-2024 01:41:27.818 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:42:31.498 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:42:31.498 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:42:31.501 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@22a0d4ea')
+29-Apr-2024 01:42:34.787 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 01:43:14.073 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 01:43:14.073 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 01:43:14.077 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@5f7da3d3')
+29-Apr-2024 01:43:25.767 嚴重 [http-nio-8080-exec-2] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 09:24:30.016 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 09:24:30.016 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 09:24:30.023 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@6ecdbab8')
+29-Apr-2024 09:24:32.097 嚴重 [http-nio-8080-exec-1] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 09:27:42.501 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 09:27:42.501 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 09:27:42.506 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@7dd611c8')
+29-Apr-2024 09:27:43.723 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextDestroyed()
+29-Apr-2024 09:27:43.723 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextDestroyed()
+29-Apr-2024 09:27:55.317 嚴重 [http-nio-8080-exec-3] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
+29-Apr-2024 09:30:31.014 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 09:30:31.015 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 09:30:31.019 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@6ecdbab8')
+29-Apr-2024 09:33:41.188 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+29-Apr-2024 09:33:41.188 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+29-Apr-2024 09:33:41.193 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@7e744f43')
+29-Apr-2024 09:33:42.846 資訊 [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextDestroyed()
+29-Apr-2024 09:33:42.846 資訊 [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextDestroyed()
+29-Apr-2024 09:33:46.937 嚴重 [http-nio-8080-exec-9] org.apache.catalina.core.StandardWrapperValve.invoke Servlet.service() for servlet [jsp] in context with path [/comp4321] threw exception [An exception occurred processing [comp4321.jsp] at line [13]
+
+10:     query = query.replaceAll("\"(\\w+)\\s(\\w+)\"", "$1_$2");
+11: 
+12:     SearchEngine searchEngine = new SearchEngine();
+13:     String results = searchEngine.searchString(query);
+14:     System.out.println(results);
+15: }
+16: else
+
+
+Stacktrace:] with root cause
+	java.lang.ClassNotFoundException: src.PageInfo
+		at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:593)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.forName0(Native Method)
+		at java.base/java.lang.Class.forName(Class.java:534)
+		at java.base/java.lang.Class.forName(Class.java:513)
+		at java.base/java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:804)
+		at java.base/java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:2061)
+		at java.base/java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1927)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2252)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.htree.HashBucket.readExternal(HashBucket.java:299)
+		at java.base/java.io.ObjectInputStream.readExternalData(ObjectInputStream.java:2333)
+		at java.base/java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2282)
+		at java.base/java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1762)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:540)
+		at java.base/java.io.ObjectInputStream.readObject(ObjectInputStream.java:498)
+		at jdbm.helper.Serialization.deserialize(Serialization.java:93)
+		at jdbm.helper.DefaultSerializer.deserialize(DefaultSerializer.java:97)
+		at jdbm.recman.BaseRecordManager.fetch(BaseRecordManager.java:341)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:263)
+		at jdbm.recman.CacheRecordManager.fetch(CacheRecordManager.java:242)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:521)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.prepareNext(HashDirectory.java:534)
+		at jdbm.htree.HashDirectory$HDIterator.<init>(HashDirectory.java:463)
+		at jdbm.htree.HashDirectory.keys(HashDirectory.java:377)
+		at jdbm.htree.HTree.keys(HTree.java:165)
+		at src.SearchEngine.getDocumentFrequency(SearchEngine.java:140)
+		at src.SearchEngine.calculateDocumentScores(SearchEngine.java:215)
+		at src.SearchEngine.search(SearchEngine.java:253)
+		at src.SearchEngine.searchString(SearchEngine.java:297)
+		at org.apache.jsp.comp4321_jsp._jspService(comp4321_jsp.java:135)
+		at org.apache.jasper.runtime.HttpJspBase.service(HttpJspBase.java:70)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:456)
+		at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:357)
+		at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:305)
+		at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:716)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:131)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:110)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:673)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:636)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:1583)
