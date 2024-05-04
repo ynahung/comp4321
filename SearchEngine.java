@@ -18,6 +18,7 @@ public class SearchEngine {
     private static final String STOPWORDS_FILE_PATH = "./stopwords.txt";
 
     private HTree wordIDMapForward;
+    private HTree wordIDMapBackward;
     private HTree urlPageIDMapBackward;
     private HTree parentIDPageInfoMap;
     private RecordManager recman;
@@ -33,6 +34,14 @@ public class SearchEngine {
         } else {
             wordIDMapForward = HTree.createInstance(recman);
             recman.setNamedObject("wordIDMapForward", wordIDMapForward.getRecid());
+        }
+
+        recid = recman.getNamedObject("wordIDMapBackward");
+        if (recid != 0) {
+            wordIDMapBackward = HTree.load(recman, recid);
+        } else {
+            wordIDMapBackward = HTree.createInstance(recman);
+            recman.setNamedObject("wordIDMapBackward", wordIDMapBackward.getRecid());
         }
 
         recid = recman.getNamedObject("urlPageIDMapBackward");
@@ -195,6 +204,39 @@ public class SearchEngine {
         return pageInfo != null ? pageInfo.getPageTitle() : null;
     }
 
+    private Date getDocumentDate(Integer docId) throws IOException {
+        PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(docId);
+        return pageInfo != null ? pageInfo.getDate() : null;
+    }
+
+    private ArrayList<String> getDocumentChildUrls(Integer docId) throws IOException {
+        PageInfo pageInfo = (PageInfo) parentIDPageInfoMap.get(docId);
+        return pageInfo != null ? pageInfo.getchildUrls() : null;
+    }
+
+    private String getDocumentKeywords(Integer docId) throws IOException {
+        String keywordsFreq = "";
+        int count = 1;
+        String wordFreqMapName = "wordBodyFreqMap" + docId;
+        HTree wordBodyFreqMap = HTree.load(recman, recman.getNamedObject(wordFreqMapName));
+        wordFreqMapName = "wordTitleFreqMap" + docId;
+        HTree wordTitleFreqMap = HTree.load(recman, recman.getNamedObject(wordFreqMapName));
+        FastIterator wordIter = wordBodyFreqMap.keys();
+        Object wordID = wordIter.next();
+
+        while (wordID != null & count < 11) {
+            int wordFreq = (int) wordBodyFreqMap.get(wordID);
+            if (wordTitleFreqMap.get(wordID) != null) {
+                wordFreq += (int) wordTitleFreqMap.get(wordID);
+            }
+            keywordsFreq += (String) wordIDMapBackward.get(wordID) + " " + wordFreq + "; ";
+            wordID = wordIter.next();
+            count++;
+        }
+
+        return keywordsFreq;
+    }
+
     // Calculating the TF-IDF value for a term in a document
     private double tfIdf(int termFrequency, int docFrequency, int totalDocs, double docLength) {
         if (termFrequency == 0 || docFrequency == 0) {
@@ -279,8 +321,12 @@ public class SearchEngine {
             // Assuming methods to retrieve document URL and title by document ID
             String url = getDocumentURL(docId);
             String title = getDocumentTitle(docId);
+            double size = getDocumentLength(docId);
+            Date date = getDocumentDate(docId);
+            ArrayList<String> childUrls = getDocumentChildUrls(docId);
+            String keywords = getDocumentKeywords(docId);
 
-            searchResults.add(new SearchResult(url, title, score));
+            searchResults.add(new SearchResult(url, title, score, date, size, childUrls, keywords));
         }
 
         return searchResults;
@@ -291,11 +337,20 @@ public class SearchEngine {
         private String url;
         private String title;
         private Double score;
+        private Date date;
+        private double size;
+        private ArrayList<String> childUrls;
+        private String keywords;
 
-        public SearchResult(String url, String title, Double score) {
+        public SearchResult(String url, String title, Double score, Date date, double size,
+                ArrayList<String> childUrls, String keywords) {
             this.url = url;
             this.title = title;
             this.score = score;
+            this.date = date;
+            this.size = size;
+            this.childUrls = childUrls;
+            this.keywords = keywords;
         }
 
         public String getUrl() {
@@ -308,6 +363,22 @@ public class SearchEngine {
 
         public Double getScore() {
             return score;
+        }
+
+        public Date getDate() {
+            return date;
+        }
+
+        public double getSize() {
+            return size;
+        }
+
+        public ArrayList<String> getChildUrls() {
+            return childUrls;
+        }
+
+        public String getKeywords() {
+            return keywords;
         }
     }
 
