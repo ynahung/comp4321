@@ -14,8 +14,8 @@ if(request.getParameter("query")!="")
 
     for (SearchResult result: results) { 
         %>
-            <p><%=result.getTitle()%></p>
-            <p><%=result.getUrl()%></p>
+            <h2><%=result.getTitle()%></h2>
+            <a href=<%=result.getUrl()%>><%=result.getUrl()%></a>
             <p><%=result.getDate()%>, <%=result.getSize()%></p>
             <p><%=result.getKeywords()%></p>
         <%
