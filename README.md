@@ -8,10 +8,16 @@ Build and run crawler with
 $ scripts/complie_and_run.sh
 ```
 
-Run test program with
+Prepare the search engine
 
 ```bash
-$ scripts/test.sh
+$ scripts/search.sh
+```
+
+Start the web server
+
+```bash
+$ scripts/start_server.sh
 ```
 
 ## Custom Class
