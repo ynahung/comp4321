@@ -2,3 +2,7 @@
 out/
 .DS_Store
 **.class
+database.db
+database.lg
+apache-tomcat-11.0.0-M19/logs/*
+apache-tomcat-11.0.0-M19/work/*
