@@ -20,6 +20,8 @@ Start the web server
 $ scripts/start_server.sh
 ```
 
+The website will run at http://localhost:8080/comp4321/comp4321.html .
+
 ## Custom Class
 
 ### `PageInfo`
